@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text } from 'react-native';
 
-class HelloWorldApp extends Component {
+class OrchardApp extends Component {
   render() {
     return (
       <Text>Hello world!</Text>
@@ -9,4 +9,4 @@ class HelloWorldApp extends Component {
   }
 }
 
-AppRegistry.registerComponent('HelloWorldApp', () => HelloWorldApp);
+AppRegistry.registerComponent('OrchardApp', () => OrchardApp);
