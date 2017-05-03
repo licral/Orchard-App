@@ -19,7 +19,7 @@ class OrchardApp extends Component {
 }
 
 const styles = StyleSheet.create({
-    container{
+    container: {
         flex: 1
     },
     banner: {
