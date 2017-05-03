@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text } from 'react-native';
+import { AppRegistry, Image } from 'react-native';
 
 class OrchardApp extends Component {
-  render() {
-    return (
-      <Text>Hello world!</Text>
-    );
-  }
+    render() {
+        let pic = {
+            uri : 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
+        };
+        return (
+            <image source={pic} style={{width: 193, height: 110}} />
+        );
+    }
 }
 
 AppRegistry.registerComponent('OrchardApp', () => OrchardApp);
