@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
     AppRegistry,
-    Image
+    Image,
+    Text
 } from 'react-native';
 
 class OrchardApp extends Component {
