@@ -11,7 +11,7 @@ class OrchardApp extends Component {
     render() {
         return(
             <View style={{alignItems: 'center'}}>
-                <Item style={styles.bold} name='Apples' />
+                <Item name='Apples' />
                 <Item name='Bananas' />
                 <Item name='Oranges' />
             </View>
@@ -22,7 +22,7 @@ class OrchardApp extends Component {
 class Item extends Component {
     render() {
         return (
-            <Text>Item: {this.props.name}</Text>
+            <Text style={styles.bold}>Item: {this.props.name}</Text>
         );
     }
 }
