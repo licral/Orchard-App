@@ -13,7 +13,7 @@ class OrchardApp extends Component {
         return(
             <View style={styles.container}>
                 <View style={styles.banner}>
-                    <Button title="Button" color="Blue" accessibilityLabel="Have a look here" />
+                    <Button onPress={} title="Button" color="#33ccff" accessibilityLabel="Have a look here" />
                 </View>
                 <View style={styles.page} />
             </View>
