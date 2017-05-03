@@ -28,7 +28,7 @@ class Item extends Component {
 
 const styles = StyleSheet.create({
     bold: {
-        fontWeight 'bold'
+        fontWeight: 'bold'
     }
 });
 
