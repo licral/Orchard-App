@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
         flex: 1
     },
     banner: {
-        flex: 1,
+        height: 50,
         backgroundColor: '#009900'
     },
     page: {
-        flex: 6
+        backgroundColor: 'white'
     }
 });
 
