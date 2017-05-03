@@ -10,7 +10,7 @@ class OrchardApp extends Component {
     render() {
         return(
             <View style={{alignItems: 'center'}}>
-                <Item name='Apples' />
+                <Item style={styles.bold} name='Apples' />
                 <Item name='Bananas' />
                 <Item name='Oranges' />
             </View>
@@ -25,5 +25,11 @@ class Item extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    bold: {
+        fontWeight 'bold'
+    }
+});
 
 AppRegistry.registerComponent('OrchardApp', () => OrchardApp);
