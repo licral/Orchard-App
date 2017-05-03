@@ -12,11 +12,17 @@ class OrchardApp extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <View style={styles.banner}>
-                    <Button onPress={} title="Button" color="#33ccff" accessibilityLabel="Have a look here" />
-                </View>
+                <Banner />
                 <View style={styles.page} />
             </View>
+        );
+    }
+}
+
+class Banner extends Component {
+    render() {
+        return(
+            <View style={styles.banner} />
         );
     }
 }
