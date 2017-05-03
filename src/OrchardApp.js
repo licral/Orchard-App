@@ -2,14 +2,27 @@ import React, { Component } from 'react';
 import {
     AppRegistry,
     Image,
-    Text
+    Text,
+    View
 } from 'react-native';
 
 class OrchardApp extends Component {
     render() {
         return(
-            <Text>Hello World</Text>
-        )
+            <View style={{alignItems: 'center'}}>
+                <Item name='Apples' />
+                <Item name='Bananas' />
+                <Item name='Oranges' />
+            </View>
+        );
+    }
+}
+
+class Item extends Component {
+    render() {
+        return (
+            <Text>Item: {this.props.name}</Text>
+        );
     }
 }
 
