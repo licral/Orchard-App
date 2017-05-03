@@ -10,26 +10,24 @@ import {
 class OrchardApp extends Component {
     render() {
         return(
-            <View style={{alignItems: 'center'}}>
-                <Item name='Apples' />
-                <Item name='Bananas' />
-                <Item name='Oranges' />
+            <View style={styles.container}>
+                <View style={styles.banner} />
+                <View style={styles.page} />
             </View>
         );
     }
 }
 
-class Item extends Component {
-    render() {
-        return (
-            <Text style={styles.bold}>Item: {this.props.name}</Text>
-        );
-    }
-}
-
 const styles = StyleSheet.create({
-    bold: {
-        fontWeight: 'bold'
+    container{
+        flex: 1
+    },
+    banner: {
+        flex: 1,
+        backgroundColor: '#009900'
+    },
+    page: {
+        flex: 6
     }
 });
 
