@@ -24,6 +24,8 @@ class Banner extends Component {
         return(
             <View style={styles.banner}>
                 <View style={styles.menu_button} />
+                <View style={styles.logo} />
+                <View style={styles.menu_button} />
             </View>
         );
     }
@@ -35,7 +37,9 @@ const styles = StyleSheet.create({
     },
     banner: {
         height: 65,
-        backgroundColor: '#009900'
+        backgroundColor: '#009900',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     page: {
         backgroundColor: 'white'
@@ -44,6 +48,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#66ccff',
         height: 50,
         width: 50,
+        margin: 7.5
+    },
+    logo: {
+        backgroundColor: '#66ccff',
+        height: 50,
+        width: 80,
         margin: 7.5
     }
 });
