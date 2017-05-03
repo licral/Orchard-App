@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     banner: {
-        height: 70,
+        height: 65,
         backgroundColor: '#009900'
     },
     page: {
