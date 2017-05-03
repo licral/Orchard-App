@@ -3,7 +3,8 @@ import {
     AppRegistry,
     Image,
     Text,
-    View
+    View,
+    StyleSheet
 } from 'react-native';
 
 class OrchardApp extends Component {
