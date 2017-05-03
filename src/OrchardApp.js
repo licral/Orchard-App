@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     menu_button: {
         backgroundColor: '#66ccff',
         height: 50,
-        width: 50
+        width: 50,
+        margin: 7.5
     }
 });
 
