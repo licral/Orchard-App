@@ -4,14 +4,17 @@ import {
     Image,
     Text,
     View,
-    StyleSheet
+    StyleSheet,
+    Button
 } from 'react-native';
 
 class OrchardApp extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <View style={styles.banner} />
+                <View style={styles.banner}>
+                    <Button title="Button" color="Blue" accessibilityLabel="Have a look here" />
+                </View>
                 <View style={styles.page} />
             </View>
         );
