@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     logo: {
         backgroundColor: '#66ccff',
         height: 50,
-        width: 80,
+        width: 100,
         margin: 7.5
     }
 });
