@@ -1,0 +1,3 @@
+rootProject.name = 'OrchardApp'
+
+include ':app'
