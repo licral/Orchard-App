@@ -22,7 +22,9 @@ class OrchardApp extends Component {
 class Banner extends Component {
     render() {
         return(
-            <View style={styles.banner} />
+            <View style={styles.banner}>
+                <View style={styles.menu_button} />
+            </View>
         );
     }
 }
@@ -37,6 +39,11 @@ const styles = StyleSheet.create({
     },
     page: {
         backgroundColor: 'white'
+    },
+    menu_button: {
+        backgroundColor: '#66ccff',
+        height: 50,
+        width: 50
     }
 });
 
