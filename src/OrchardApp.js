@@ -42,7 +42,7 @@ class Page extends Component {
     }
 
     fetchData(){
-        fetch("https://vast-cove-47966.herokuapp.com/get_all_tasks?done=false")
+        fetch("https://orchard-app-java-tomcat.herokuapp.com/test")
             .then((response) => response.text())
             .then((responseData) => {
                 this.setState({
