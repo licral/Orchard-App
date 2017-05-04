@@ -34,7 +34,7 @@ class Banner extends Component {
 class Page extends Component {
     constructor(){
         super();
-        this.state = {info : ""};
+        this.state = {info : "Hello"};
     }
 
     componentDidMount(){
@@ -53,9 +53,17 @@ class Page extends Component {
     }
 
     render() {
+        if(this.state.info != "Hello"){
+            return (
+                <View style={styles.page}>
+                    <Text>{this.state.info}</Text>
+                </View>
+            );
+        }
+
         return (
             <View style={styles.page}>
-                <Text>this.state.info</Text>
+                <Text>Still Waiting!</Text>
             </View>
         );
     }
