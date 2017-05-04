@@ -21,11 +21,15 @@ class OrchardApp extends Component {
 }
 
 class Banner extends Component {
+    test(){
+
+    }
+
     render() {
         return(
             <View style={styles.banner}>
                 <View style={styles.menu_button}>
-                    <MaterialIcon name="menu" size={40} color="#FFFFFF" />
+                    <MaterialIcon.Button name="menu" size={40} color="#FFFFFF" onPress={this.test()} />
                 </View>
                 <View style={styles.logo} />
                 <View style={styles.menu_button} />
@@ -55,10 +59,6 @@ class Page extends Component {
             .catch((error) => {
                 console.error(error);
             });
-    }
-
-    test(){
-
     }
 
     render() {
