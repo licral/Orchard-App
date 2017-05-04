@@ -9,11 +9,42 @@ import {
 } from 'react-native';
 
 class OrchardApp extends Component {
+    constructor(){
+        super();
+        this.state = {
+            loggedIn : false
+        };
+        this.fetchData();
+    }
+
+    fetchData(){
+        fetch("https://orchard-app-java-tomcat.herokuapp.com/isUserLoggedIn")
+            .then((response) => response.text())
+            .then((responseData) => {
+                if(responseData == 1){
+                    this.setState({
+                        loggedIn : 1
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     render() {
+        if(loggedIn){
+            return(
+                <View style={styles.container}>
+                    <Banner />
+                    <Page />
+                </View>
+            );
+        }
+
         return(
             <View style={styles.container}>
-                <Banner />
-                <Page />
+                <Text>Not logged in!</Text>
             </View>
         );
     }
