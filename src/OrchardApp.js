@@ -32,10 +32,29 @@ class Banner extends Component {
 }
 
 class Page extends Component {
+    constructor(){
+        this.state = {info : ""};
+    }
+
+    componentDidMount(){
+        this.fetchData();
+    }
+
+    fetchData(){
+        fetch("https://vast-cove-47966.herokuapp.com/get_all_tasks?done=false")
+            .then((response) => response.json())
+            .then((responseData) => {
+                this.setState({
+                    info : responseData
+                });
+            })
+            .done();
+    }
+
     render() {
         return (
             <View style={styles.page}>
-                <Text>Hello World!</Text>
+                <Text>this.state.info</Text>
             </View>
         );
     }
