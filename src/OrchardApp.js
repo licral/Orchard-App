@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     page: {
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        flex: 1
     },
     menu_button: {
         backgroundColor: '#66ccff',
