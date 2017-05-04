@@ -24,7 +24,9 @@ class Banner extends Component {
     render() {
         return(
             <View style={styles.banner}>
-                <View style={styles.menu_button} />
+                <View style={styles.menu_button}>
+                    <MaterialIcon name="menu" size={40} color="#FFFFFF" />
+                </View>
                 <View style={styles.logo} />
                 <View style={styles.menu_button} />
             </View>
@@ -64,7 +66,6 @@ class Page extends Component {
             return (
                 <View style={styles.page}>
                     <Text>{this.state.info}</Text>
-                    <MaterialIcon name="menu" size={50} color="#000000" />
                 </View>
             );
         }
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     banner: {
-        height: 65,
+        height: 70,
         backgroundColor: '#009900',
         flexDirection: 'row',
         justifyContent: 'space-between'
@@ -92,10 +93,9 @@ const styles = StyleSheet.create({
         flex: 1
     },
     menu_button: {
-        backgroundColor: '#66ccff',
-        height: 50,
-        width: 50,
-        margin: 7.5
+        height: 40,
+        width: 40,
+        margin: 15
     },
     logo: {
         backgroundColor: '#66ccff',
