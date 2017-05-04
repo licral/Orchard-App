@@ -43,15 +43,14 @@ class Page extends Component {
 
     fetchData(){
         fetch("https://vast-cove-47966.herokuapp.com/get_all_tasks?done=false")
-            .then((response) => response.json())
             .then((responseData) => {
                 this.setState({
-                    info : responseData
+                    info : "Hi"
                 });
-                console.log(responseData);
-                console.log("Heelo!");
             })
-            .done();
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     render() {
