@@ -28,9 +28,7 @@ class Banner extends Component {
     render() {
         return(
             <View style={styles.banner}>
-                <View style={styles.menu_button}>
-                    <MaterialIcon.Button name="menu" size={40} color="#FFFFFF" onPress={this.test()} />
-                </View>
+                <MaterialIcon.Button name="menu" style={styles.menu_button} size={40} color="#FFFFFF" onPress={this.test()} />
                 <View style={styles.logo} />
                 <View style={styles.menu_button} />
             </View>
@@ -93,8 +91,6 @@ const styles = StyleSheet.create({
         flex: 1
     },
     menu_button: {
-        height: 40,
-        width: 40,
         margin: 15
     },
     logo: {
