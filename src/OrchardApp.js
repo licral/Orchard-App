@@ -49,6 +49,7 @@ class Page extends Component {
                     info : responseData
                 });
                 console.log(responseData);
+                console.log("Heelo!");
             })
             .done();
     }
