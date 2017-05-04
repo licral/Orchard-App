@@ -13,7 +13,7 @@ class OrchardApp extends Component {
         return(
             <View style={styles.container}>
                 <Banner />
-                <View style={styles.page} />
+                <Page />
             </View>
         );
     }
@@ -26,6 +26,16 @@ class Banner extends Component {
                 <View style={styles.menu_button} />
                 <View style={styles.logo} />
                 <View style={styles.menu_button} />
+            </View>
+        );
+    }
+}
+
+class Page extends Component {
+    render() {
+        return (
+            <View style={styles.page}>
+                <Text>Hello World!</Text>
             </View>
         );
     }
