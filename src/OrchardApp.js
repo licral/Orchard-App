@@ -60,7 +60,7 @@ class Page extends Component {
             return (
                 <View style={styles.page}>
                     <Text>{this.state.info}</Text>
-                    <Icon name="rocket" size={30} color="#900" />
+                    <Icon name="menu" size={30} color="#000000" />
                 </View>
             );
         }
@@ -68,7 +68,7 @@ class Page extends Component {
         return (
             <View style={styles.page}>
                 <Text>Still Waiting!</Text>
-                <Icon name="rocket" size={30} color="#900" />
+                <Icon name="menu" size={30} color="#000000" />
             </View>
         );
     }
