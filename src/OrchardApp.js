@@ -29,7 +29,7 @@ class Banner extends Component {
         return(
             <View style={styles.banner}>
                 <View style={styles.menu_button}>
-                    <MaterialIcon name="menu" size={40} onPress={this.test} />
+                    <MaterialIcon name="menu" color="white" size={40} onPress={this.test} />
                 </View>
                 <View style={styles.logo} />
                 <View style={styles.menu_button} />
