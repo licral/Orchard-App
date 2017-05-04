@@ -33,6 +33,7 @@ class Banner extends Component {
 
 class Page extends Component {
     constructor(){
+        super();
         this.state = {info : ""};
     }
 
