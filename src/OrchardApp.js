@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {
     AppRegistry,
     Image,
@@ -64,7 +64,7 @@ class Page extends Component {
             return (
                 <View style={styles.page}>
                     <Text>{this.state.info}</Text>
-                    <Icon.Button name="facebook" backgroundColor="#3b5995" onPress={this.test} />
+                    <MaterialIcon name="menu" size={50} color="#000000" />
                 </View>
             );
         }
