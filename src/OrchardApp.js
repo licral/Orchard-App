@@ -48,6 +48,7 @@ class Page extends Component {
                 this.setState({
                     info : responseData
                 });
+                console.log(responseData);
             })
             .done();
     }
