@@ -55,12 +55,16 @@ class Page extends Component {
             });
     }
 
+    test(){
+
+    }
+
     render() {
         if(this.state.info != "Hello"){
             return (
                 <View style={styles.page}>
                     <Text>{this.state.info}</Text>
-                    <Icon name="menu" size={30} color="#000000" />
+                    <Icon.Button name="facebook" backgroundColor="#3b5995" onPress={this.test} />
                 </View>
             );
         }
@@ -68,7 +72,6 @@ class Page extends Component {
         return (
             <View style={styles.page}>
                 <Text>Still Waiting!</Text>
-                <Icon name="menu" size={30} color="#000000" />
             </View>
         );
     }
