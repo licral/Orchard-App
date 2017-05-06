@@ -3,11 +3,10 @@ import styles from '../styles/style.js';
 import {
     View,
     Text,
-    FlatList,
-    ScrollView
+    FlatList
 } from 'react-native';
 
-var menu = class Menu extends Component {
+var sideMenu = class SideMenu extends Component {
     render() {
         return (
             <View style={styles.menuContainer}>
@@ -33,4 +32,4 @@ var menu = class Menu extends Component {
     }
 }
 
-export default menu;
+export default sideMenu;

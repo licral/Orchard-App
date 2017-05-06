@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
-import Banner from './components/Banner.js';
-
-import ToolbarAndroid from 'ToolbarAndroid';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import AppView from './components/AppView.js';
 import {
-    AppRegistry,
-    Image,
-    Text,
-    View,
-    Button
+    AppRegistry
 } from 'react-native';
 
 class OrchardApp extends Component {
     render() {
         return(
-            <Banner />
+            <AppView />
         );
     }
 }

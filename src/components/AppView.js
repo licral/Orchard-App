@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import ToolbarAndroid from 'ToolbarAndroid';
 import DrawerLayoutAndroid from 'DrawerLayoutAndroid';
 import Drawer from 'react-native-drawer';
-import Menu from './Menu.js';
+import SideMenu from './SideMenu.js';
 import styles from '../styles/style.js';
 import {
     Text,
     View
 } from 'react-native';
 
-var banner = class Banner extends Component {
+var appView = class AppView extends Component {
     render() {
-        var navigationView = <Menu />;
+        var navigationView = <SideMenu />;
         return(
             <DrawerLayoutAndroid
                 ref={(ref) => this._drawer = ref}
@@ -34,4 +34,4 @@ var banner = class Banner extends Component {
     }
 }
 
-export default banner;
+export default appView;
