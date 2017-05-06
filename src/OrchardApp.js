@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ToolbarAndroid from 'ToolbarAndroid';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {
     AppRegistry,
@@ -12,28 +13,20 @@ import {
 class OrchardApp extends Component {
     render() {
         return(
-            <View style={styles.container}>
-                <Banner />
-                <Page />
-            </View>
+            <Banner />
         );
     }
 }
 
 class Banner extends Component {
-    test(){
-
-    }
-
     render() {
         return(
-            <View style={styles.banner}>
-                <View style={styles.menu_button}>
-                    <MaterialIcon name="menu" color="white" size={40} onPress={this.test} />
-                </View>
-                <View style={styles.logo} />
-                <View style={styles.menu_button} />
-            </View>
+            <ToolbarAndroid
+                navIcon = {require('./img/menuIcon.png')}
+                title = "Date Placeholder"
+                style = {styles.toolbar}
+                titleColor = 'white'
+            />
         );
     }
 }
@@ -100,6 +93,10 @@ const styles = StyleSheet.create({
         height: 50,
         width: 100,
         margin: 7.5
+    },
+    toolbar: {
+        height: 56,
+        backgroundColor: '#43a047'
     }
 });
 
