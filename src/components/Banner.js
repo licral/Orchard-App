@@ -1,36 +1,37 @@
 import React, { Component } from 'react';
 import ToolbarAndroid from 'ToolbarAndroid';
+import DrawerLayoutAndroid from 'DrawerLayoutAndroid';
 import Drawer from 'react-native-drawer';
 import Menu from './Menu.js';
+import styles from '../styles/style.js';
 import {
-    Text
+    Text,
+    View
 } from 'react-native';
 
 var banner = class Banner extends Component {
-   render() {
-       return(
-            <Drawer
+    render() {
+        var navigationView = <Menu />;
+        return(
+            <DrawerLayoutAndroid
                 ref={(ref) => this._drawer = ref}
-                type="overlay"
-                content={<Menu styleMenu={this.props.styleMenu} />}
-                tapToClose={true}
-                openDrawerOffset={0.2} // 20% gap on the right side of drawer
-                panOpenMask={0.2}
-                panCloseMask={0.2}
-                closedDrawerOffset={-3}
-                tweenHandler={(ratio) => ({
-                    main: { opacity:(2-ratio)/2}
-                })}>
-               <ToolbarAndroid
-                   navIcon = {require('../img/menuIcon.png')}
-                   onIconClicked = {() => {this._drawer.open()}}
-                   title = "Date Placeholder"
-                   style = {this.props.styleToolbar}
-                   titleColor = 'white'
-               />
-           </Drawer>
-       );
-   }
+                drawerWidth={300}
+                drawerPosition={DrawerLayoutAndroid.positions.Left}
+                renderNavigationView={() => navigationView}
+                >
+                <ToolbarAndroid
+                    navIcon = {require('../img/menuIcon.png')}
+                    onIconClicked = {() => {this._drawer.openDrawer()}}
+                    title = "Date Placeholder"
+                    style = {styles.toolbar}
+                    titleColor = 'white'
+                />
+                <View>
+                    <Text>This is going to be the agenda view of the history activities</Text>
+                </View>
+            </DrawerLayoutAndroid>
+        );
+    }
 }
 
 export default banner;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from './styles/style.js';
 import Banner from './components/Banner.js';
 
 import ToolbarAndroid from 'ToolbarAndroid';
@@ -15,7 +14,7 @@ import {
 class OrchardApp extends Component {
     render() {
         return(
-            <Banner styleToolbar={styles.toolbar} styleMenu={styles.menu} />
+            <Banner />
         );
     }
 }
