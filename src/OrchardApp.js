@@ -1,13 +1,35 @@
 import React, { Component } from 'react';
-import AppView from './components/AppView.js';
+import ToolbarAndroid from 'ToolbarAndroid';
+import DrawerLayoutAndroid from 'DrawerLayoutAndroid';
+import Drawer from 'react-native-drawer';
+import SideMenu from './components/SideMenu.js';
+import CalendarView from './views/calendarView.js';
+import styles from './styles/style.js';
 import {
-    AppRegistry
+    AppRegistry,
+    Text,
+    View
 } from 'react-native';
 
 class OrchardApp extends Component {
     render() {
+        var navigationView = <SideMenu />;
         return(
-            <AppView />
+            <DrawerLayoutAndroid
+                ref={(ref) => this._drawer = ref}
+                drawerWidth={300}
+                drawerPosition={DrawerLayoutAndroid.positions.Left}
+                renderNavigationView={() => navigationView}
+                >
+                <ToolbarAndroid
+                    navIcon = {require('./img/menuIcon.png')}
+                    onIconClicked = {() => {this._drawer.openDrawer()}}
+                    title = "Date Placeholder"
+                    style = {styles.toolbar}
+                    titleColor = 'white'
+                />
+                <CalendarView />
+            </DrawerLayoutAndroid>
         );
     }
 }
