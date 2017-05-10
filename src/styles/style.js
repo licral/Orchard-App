@@ -22,6 +22,13 @@ const styles = StyleSheet.create({
     },
     menuItemText: {
         fontSize: 16
+    },
+    newButton: {
+        fontSize: 20,
+        color: 'white'
+    },
+    pageContent: {
+        flex: 1
     }
 });
 
