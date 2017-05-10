@@ -3,6 +3,7 @@ import ToolbarAndroid from 'ToolbarAndroid';
 import DrawerLayoutAndroid from 'DrawerLayoutAndroid';
 import Drawer from 'react-native-drawer';
 import SideMenu from './SideMenu.js';
+import CalendarView from '../views/calendarView.js';
 import styles from '../styles/style.js';
 import {
     Text,
@@ -26,9 +27,7 @@ var appView = class AppView extends Component {
                     style = {styles.toolbar}
                     titleColor = 'white'
                 />
-                <View>
-                    <Text>This is going to be the agenda view of the history activities</Text>
-                </View>
+                <CalendarView />
             </DrawerLayoutAndroid>
         );
     }
