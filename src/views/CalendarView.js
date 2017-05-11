@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/style.js';
 import {
     Text,
