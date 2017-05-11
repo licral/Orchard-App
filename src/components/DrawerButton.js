@@ -5,9 +5,8 @@ import styles from '../styles/style.js';
 
 const DrawerButton = ({ navigation }) => (
     <TouchableOpacity
-        onPress={() => navigation.navigate('DrawerOpen')}
-        >
-        <Icon name="menu" style={styles.menuButton} />
+        onPress={() => navigation.navigate('DrawerOpen')}>
+        <Icon name="menu" style={styles.headerLeftIcon} />
     </TouchableOpacity>
 );
 

@@ -6,7 +6,13 @@ const styles = StyleSheet.create({
     toolbar: {
         backgroundColor: '#43a047'
     },
-    menuButton: {
+    tabBar: {
+        backgroundColor: 'white'
+    },
+    tabIndicator: {
+        backgroundColor: '#43a047'
+    },
+    headerLeftIcon: {
         color: 'white',
         fontSize: 24,
         marginLeft: 16
@@ -16,7 +22,8 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     pageContent: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'white'
     }
 });
 
