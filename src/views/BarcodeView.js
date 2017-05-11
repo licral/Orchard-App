@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {TabNavigator} from 'react-navigation';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import CameraView from './CameraView.js';
 import styles from '../styles/style.js';
 import {
     Text,
@@ -16,22 +18,12 @@ class ManualView extends Component{
     }
 }
 
-class CameraView extends Component{
-    render () {
-        return (
-            <View style={styles.pageContent}>
-                <Text>This is a camera input page</Text>
-            </View>
-        );
-    }
-}
-
 var barcodeView = TabNavigator({
-    Manual: {
-        screen: ManualView
-    },
     Camera: {
         screen: CameraView
+    },
+    Manual: {
+        screen: ManualView
     }
 }, {
     tabBarOptions: {

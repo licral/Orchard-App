@@ -20,7 +20,10 @@ var calendarView = class CalendarView extends Component {
                         onPress={() => {navigate('Barcode')}}>
                         <Icon name="create" style={styles.newButton} />
                     </ActionButton.Item>
-                    <ActionButton.Item buttonColor="#ff0000" title="Register New Plant" onPress={() => {}}>
+                    <ActionButton.Item
+                        buttonColor="#ff0000"
+                        title="Register New Plant"
+                        onPress={() => {navigate('Barcode')}}>
                         <Icon name="local-florist" style={styles.newButton} />
                     </ActionButton.Item>
                </ActionButton>
