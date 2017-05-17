@@ -11,8 +11,8 @@ import {
 var STORAGE_KEY = 'id-token';
 var Form = tForm.form.Form;
 var Login = tForm.struct({
-    user: tForm.String,
-    pass: tForm.String
+    username: tForm.String,
+    password: tForm.String
 });
 const options = {};
 
@@ -41,9 +41,14 @@ var loginView = class LoginView extends Component{
                 'Authorization': DEMO_TOKEN
             }
         })
-        .then((response) => response.text())
-        .then((result) => {
-            this.setState({data: result});
+        .then((response) => {
+            if(response.ok){
+                response.text().then((responseData) => {
+                    this.setState({data: responseData});
+                });
+            } else {
+                console.log("Not ok");
+            }
         })
         .done();
     }
@@ -56,24 +61,19 @@ var loginView = class LoginView extends Component{
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: JSON.stringify({
-                    username: value.user,
-                    password: value.pass
-                })
+                body: 'username=' + encodeURIComponent(value.username) + '&password=' + encodeURIComponent(value.password)
             })
-//            .then((response) => response.json())
-//            .then((responseData) => {
-//                console.log(responseData);
-//                this.setState({data: "logged in"});
-//                this._onValueChange(STORAGE_KEY, responseData.id_token);
-//            })
             .then((response) => {
                 if(response.ok){
-                    response.json().then(
-                        console.log("Got data");
-                    );
+                    response.json().then((responseData) => {
+                        console.log(responseData);
+                        this.setState({data: "logged in"});
+                        this._onValueChange(STORAGE_KEY, responseData.id_token);
+                    });
+                } else {
+                    console.log("Not ok");
                 }
             })
             .done();
@@ -99,6 +99,7 @@ var loginView = class LoginView extends Component{
                 />
                 <Button onPress={this._userLogin.bind(this)} title="Login" />
                 <Button onPress={this._getTest.bind(this)} title="Test!" />
+                <Button onPress={this._userLogout.bind(this)} title="Logout" />
                 <Text>Got data: {this.state.data}</Text>
             </View>
         );
