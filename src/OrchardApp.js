@@ -21,11 +21,15 @@ class OrchardApp extends Component{
     }
 
     async _confirmLoggedIn(){
-        var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
-        if(TOKEN == null){
-            this.setState({loggedIn: false});
-        } else {
-            this.setState({loggedIn: true});
+        try{
+            var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
+            if(TOKEN == null){
+                this.setState({loggedIn: false});
+            } else {
+                this.setState({loggedIn: true});
+            }
+        } catch (error) {
+            console.log("AsyncStorage error: " + error.message);
         }
     }
 

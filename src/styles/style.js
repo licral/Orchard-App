@@ -24,6 +24,11 @@ const styles = StyleSheet.create({
     pageContent: {
         flex: 1,
         backgroundColor: 'white'
+    },
+    loginInput: {
+        borderBottomWidth: 1,
+        borderBottomColor: 'gray',
+        margin: 10
     }
 });
 
