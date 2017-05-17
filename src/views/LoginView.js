@@ -8,7 +8,6 @@ import {
     Button
 } from 'react-native';
 
-var STORAGE_KEY = 'id-token';
 var Form = tForm.form.Form;
 var Login = tForm.struct({
     username: tForm.String,
@@ -33,7 +32,7 @@ var loginView = class LoginView extends Component{
     }
 
     async _getTest(){
-        var DEMO_TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
+        var DEMO_TOKEN = await AsyncStorage.getItem(this.props.storageKey);
         console.log(DEMO_TOKEN);
         fetch('https://orchard-app-java-tomcat.herokuapp.com/test', {
             method: 'GET',
@@ -70,7 +69,7 @@ var loginView = class LoginView extends Component{
                     response.json().then((responseData) => {
                         console.log(responseData);
                         this.setState({data: "logged in"});
-                        this._onValueChange(STORAGE_KEY, responseData.id_token);
+                        this._onValueChange(this.props.storageKey, responseData.id_token);
                     });
                 } else {
                     console.log("Not ok");
@@ -82,7 +81,7 @@ var loginView = class LoginView extends Component{
 
     async _userLogout(){
         try{
-            await AsyncStorage.removeItem(STORAGE_KEY);
+            await AsyncStorage.removeItem(this.props.storageKey);
             this.setState({data: "Logged out now!"});
         } catch (error) {
             console.log("AsyncStorage error: " + error.message);

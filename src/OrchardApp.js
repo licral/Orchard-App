@@ -8,8 +8,13 @@ import BarcodeView from './views/BarcodeView.js';
 import styles from './styles/style.js';
 
 import {
-    AppRegistry
+    AsyncStorage,
+    AppRegistry,
+    View,
+    ActivityIndicator
 } from 'react-native';
+
+var STORAGE_KEY = 'id-token';
 
 const InnerNavigator = StackNavigator({
     Calendar: {
@@ -32,10 +37,7 @@ const InnerNavigator = StackNavigator({
     })
 });
 
-const OrchardApp = DrawerNavigator({
-    Login: {
-        screen: LoginView
-    },
+const OuterNavigator = DrawerNavigator({
     Home: {
         screen: InnerNavigator,
         navigationOptions: () => ({
@@ -44,4 +46,46 @@ const OrchardApp = DrawerNavigator({
     }
 });
 
-AppRegistry.registerComponent('OrchardApp', () => LoginView);
+class OrchardApp extends Component{
+    constructor(){
+        super();
+        this.state = {
+            loggedIn: null
+        };
+    }
+
+    async _confirmLoggedIn(){
+        var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
+        if(TOKEN == null){
+            this.setState({loggedIn: false});
+        } else {
+            this.setState({loggedIn: true});
+        }
+    }
+
+    render(){
+        this._confirmLoggedIn();
+
+        if(this.state.loggedIn == null){
+            return(
+                <View style={styles.pageContent}>
+                    <ActivityIndicator
+                        animating={true}
+                        style={{height: 80}}
+                        size="large"
+                      />
+                </View>
+            );
+        } else if(this.state.loggedIn) {
+            return(
+                <OuterNavigator />
+            );
+        } else {
+            return(
+                <LoginView storageKey={STORAGE_KEY} />
+            );
+        }
+    }
+}
+
+AppRegistry.registerComponent('OrchardApp', () => OrchardApp);
