@@ -3,8 +3,7 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import styles from '../styles/style.js';
 import {
     Text,
-    View,
-    Linking
+    View
 } from 'react-native';
 
 var cameraView = class CameraView extends Component{

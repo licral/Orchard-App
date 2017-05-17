@@ -3,6 +3,7 @@ import {StackNavigator, DrawerNavigator} from 'react-navigation';
 import DrawerButton from './components/DrawerButton.js';
 
 import CalendarView from './views/CalendarView.js';
+import LoginView from './views/LoginView.js';
 import BarcodeView from './views/BarcodeView.js';
 import styles from './styles/style.js';
 
@@ -32,12 +33,15 @@ const InnerNavigator = StackNavigator({
 });
 
 const OrchardApp = DrawerNavigator({
-   Home: {
+    Login: {
+        screen: LoginView
+    },
+    Home: {
         screen: InnerNavigator,
         navigationOptions: () => ({
             title: "View History"
         })
-   },
+    }
 });
 
-AppRegistry.registerComponent('OrchardApp', () => OrchardApp);
+AppRegistry.registerComponent('OrchardApp', () => LoginView);
