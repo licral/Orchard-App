@@ -14,7 +14,22 @@ const customDrawer = class CustomDrawer extends Component{
 
     async _logout(){
         try{
-            await AsyncStorage.removeItem(STORAGE_KEY);
+             var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
+             fetch('https://orchard-app-java-tomcat.herokuapp.com/logout', {
+                     method: "POST",
+                     headers: {
+                         'Content-Type': 'application/x-www-form-urlencoded'
+                     },
+                     body: 'token=' + encodeURIComponent(TOKEN)
+                 })
+                 .then((response) => {
+                     if(response.ok){
+                          AsyncStorage.removeItem(STORAGE_KEY);
+                     } else {
+                         console.log("Not ok");
+                     }
+                 })
+                 .done();
         } catch (error) {
             console.log("AsyncStorage error: " + error.message);
         }
