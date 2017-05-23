@@ -4,6 +4,7 @@ import CustomDrawer from './CustomDrawer.js';
 import DrawerButton from './DrawerButton.js';
 import CalendarView from '../views/CalendarView.js';
 import BarcodeView from '../views/BarcodeView.js';
+import RegisterView from '../views/RegisterView.js';
 import styles from '../styles/style.js';
 
 const InnerNavigator = StackNavigator({
@@ -18,6 +19,12 @@ const InnerNavigator = StackNavigator({
         screen: BarcodeView,
         navigationOptions: () => ({
             headerTitle: "Enter Barcode"
+        })
+    },
+    Register: {
+        screen: RegisterView,
+        navigationOptions: () => ({
+            headerTitle: "Register Plant Details"
         })
     }
 }, {

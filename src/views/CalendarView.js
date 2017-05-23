@@ -10,10 +10,10 @@ import {
 var calendarView = class CalendarView extends Component {
    render() {
         const {navigate} = this.props.navigation;
-       return(
-           <View style={styles.pageContent}>
-               <Text>This is going to show a calender view of the activity history</Text>
-               <ActionButton buttonColor="rgba(255,0,0,1)">
+        return(
+            <View style={styles.pageContent}>
+                <Text>This is going to show a calender view of the activity history</Text>
+                <ActionButton buttonColor="rgba(255,0,0,1)">
                     <ActionButton.Item
                         buttonColor="#ff0000"
                         title="Record New Activity"
@@ -23,12 +23,12 @@ var calendarView = class CalendarView extends Component {
                     <ActionButton.Item
                         buttonColor="#ff0000"
                         title="Register New Plant"
-                        onPress={() => {navigate('Barcode')}}>
+                        onPress={() => {navigate('Barcode', {action: 'register'})}}>
                         <Icon name="local-florist" style={styles.newButton} />
                     </ActionButton.Item>
-               </ActionButton>
-           </View>
-       );
+                </ActionButton>
+            </View>
+        );
    }
 }
 
