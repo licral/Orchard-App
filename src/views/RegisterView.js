@@ -14,7 +14,7 @@ var registerView = class RegisterView extends Component {
         super();
         this.state = {
             species: "",
-            speciesList: []
+            speciesList: {}
         }
     }
 
@@ -33,8 +33,8 @@ var registerView = class RegisterView extends Component {
                 if(response.ok){
                     response.json().then((responseData) => {
                         this.setState({speciesList: responseData});
-                        this.setState({species: responseData[0]});
-                    })
+                        this.setState({species: Object.keys(responseData)[0]});
+                    });
                 }
             })
             .done();
@@ -44,7 +44,9 @@ var registerView = class RegisterView extends Component {
     }
 
     render() {
-        this.getSpecies();
+        if(this.state.species === ""){
+            this.getSpecies();
+        }
         const {state} = this.props.navigation;
         if(this.state.species === ""){
             return(
@@ -55,11 +57,11 @@ var registerView = class RegisterView extends Component {
         } else {
             var speciesItems = []
             var itemList = this.state.speciesList;
-            for(var i = 0; i < itemList.length; i++){
+            Object.keys(itemList).map(function(key){
                 speciesItems.push(
-                    <Picker.Item label={itemList[i]} value={itemList[i]} />
+                    <Picker.Item label={itemList[key]} value={key} />
                 );
-            }
+            });
             return(
                <View style={styles.pageContent}>
                    <Text>{state.params.code}</Text>
