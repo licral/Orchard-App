@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {NavigationActions} from 'react-navigation';
 import styles from '../styles/style.js';
 import {
     AsyncStorage,
@@ -91,7 +92,7 @@ var registerView = class RegisterView extends Component {
         var variety_id = this.state.variety;
         var notes = this.state.notes;
         var dateobj = new Date();
-        var date = dateobj.getDate() + "/" + (dateobj.getMonth() + 1) + "/" + dateobj.getFullYear();
+        var date = dateobj.getFullYear() + "-" + (dateobj.getMonth() + 1) + "-" + dateobj.getDate();
         navigator.geolocation.getCurrentPosition(async (position) => {
             var longitude = position['coords']['longitude'];
             var latitude = position['coords']['latitude'];
@@ -114,14 +115,18 @@ var registerView = class RegisterView extends Component {
                 })
                 .then((response) => {
                     if(response.ok){
-//                        response.json().then((responseData) => {
-//                            this.setState({varietyList: responseData});
-//                            this.setState({variety: Object.keys(responseData)[0]});
-//                        });
-//                        response.text().then((responseData) => {
-//                            console.log(responseData);
-//                        });
-                        console.log("Ok");
+                        const resetAction = NavigationActions.reset({
+                            index: 0,
+                            actions: [
+                                NavigationActions.navigate({
+                                    routeName: 'Calendar',
+                                    params: {
+                                        message: "Plant has been registered."
+                                    }
+                                })
+                            ]
+                        });
+                        this.props.navigation.dispatch(resetAction);
                     }
                 })
                 .done();

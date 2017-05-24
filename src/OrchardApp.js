@@ -7,7 +7,8 @@ import {
     AsyncStorage,
     AppRegistry,
     View,
-    ActivityIndicator
+    ActivityIndicator,
+    StatusBar
 } from 'react-native';
 
 var STORAGE_KEY = 'id-token';
@@ -39,6 +40,10 @@ class OrchardApp extends Component{
         if(this.state.loggedIn == null){
             return(
                 <View style={styles.pageContent}>
+                    <StatusBar
+                        backgroundColor="#43a047"
+                        barStyle="light-content"
+                        />
                     <ActivityIndicator
                         animating={true}
                         style={{height: 80}}
