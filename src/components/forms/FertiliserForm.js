@@ -19,8 +19,43 @@ const fertiliserForm = class FertiliserForm extends Component{
         }
     }
 
-    record(){
-        console.log("Called in fertiliser!");
+    async record(activity_id){
+        var product = this.state.product;
+        var rate = this.state.rate;
+        try{
+            var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
+            fetch('https://orchard-app-java-tomcat.herokuapp.com/record/fertiliser', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': TOKEN
+                },
+                body: 'activity_id=' + encodeURIComponent(activity_id)
+                    + '&product=' + encodeURIComponent(product)
+                    + '&rate=' + encodeURIComponent(rate)
+            })
+            .then((response) => {
+                if(response.ok){
+                    console.log("Added to fertiliser record");
+//                    const resetAction = NavigationActions.reset({
+//                        index: 0,
+//                        actions: [
+//                            NavigationActions.navigate({
+//                                routeName: 'Calendar',
+//                                params: {
+//                                    message: "Plant has been registered."
+//                                }
+//                            })
+//                        ]
+//                    });
+//                    this.props.navigation.dispatch(resetAction);
+                }
+            })
+            .done();
+        } catch (error) {
+            console.log("AsyncStorage error: " + error.message);
+        }
     }
 
     render () {

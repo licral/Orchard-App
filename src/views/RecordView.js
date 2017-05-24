@@ -79,10 +79,54 @@ var recordView = class RecordView extends Component{
         }
     }
 
-    record(){
-        var form = this.refs.form;
-        if(form != undefined){
-            form.record();
+    async record(){
+        const {state} = this.props.navigation;
+        var plant_id = state.params.plant_id;
+        var dateobj = new Date();
+        var date = dateobj.getFullYear() + "-" + (dateobj.getMonth() + 1) + "-" + dateobj.getDate();
+        var time = dateobj.getHours() + ":" + dateobj.getMinutes() + ":00";
+        var notes = this.state.notes;
+        var type_id = this.state.activity;
+        try{
+            var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
+            fetch('https://orchard-app-java-tomcat.herokuapp.com/record/general', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': TOKEN
+                },
+                body: 'plant_id=' + encodeURIComponent(plant_id)
+                    + '&date=' + encodeURIComponent(date)
+                    + '&time=' + encodeURIComponent(time)
+                    + '&notes=' + encodeURIComponent(notes)
+                    + '&type_id=' + encodeURIComponent(type_id)
+            })
+            .then((response) => {
+                if(response.ok){
+                    response.json().then((responseData) => {
+                        var form = this.refs.form;
+                        if(form != undefined){
+                            form.record(responseData["id"]);
+                        }
+                    });
+//                    const resetAction = NavigationActions.reset({
+//                        index: 0,
+//                        actions: [
+//                            NavigationActions.navigate({
+//                                routeName: 'Calendar',
+//                                params: {
+//                                    message: "Plant has been registered."
+//                                }
+//                            })
+//                        ]
+//                    });
+//                    this.props.navigation.dispatch(resetAction);
+                }
+            })
+            .done();
+        } catch (error) {
+            console.log("AsyncStorage error: " + error.message);
         }
     }
 
