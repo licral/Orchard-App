@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {NavigationActions} from 'react-navigation';
 import FertiliserForm from '../components/forms/FertiliserForm.js';
 import ChemicalForm from '../components/forms/ChemicalForm.js';
 import HarvestForm from '../components/forms/HarvestForm.js';
@@ -63,7 +64,7 @@ var recordView = class RecordView extends Component{
         var activityType = this.state.activityList[this.state.activity];
         if(activityType === "Fertiliser"){
             return (
-                <FertiliserForm ref='form' />
+                <FertiliserForm ref='form' navigateHome={this.navigateHome.bind(this)} />
             );
         } else if(activityType === "Chemical Sprayed"){
             return (
@@ -77,6 +78,21 @@ var recordView = class RecordView extends Component{
         else {
             return null;
         }
+    }
+
+    navigateHome(){
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({
+                    routeName: 'Calendar',
+                    params: {
+                        message: "Activity has been recorded."
+                    }
+                })
+            ]
+        });
+        this.props.navigation.dispatch(resetAction);
     }
 
     async record(){
@@ -108,20 +124,10 @@ var recordView = class RecordView extends Component{
                         var form = this.refs.form;
                         if(form != undefined){
                             form.record(responseData["id"]);
+                        } else {
+                            this.navigateHome();
                         }
                     });
-//                    const resetAction = NavigationActions.reset({
-//                        index: 0,
-//                        actions: [
-//                            NavigationActions.navigate({
-//                                routeName: 'Calendar',
-//                                params: {
-//                                    message: "Plant has been registered."
-//                                }
-//                            })
-//                        ]
-//                    });
-//                    this.props.navigation.dispatch(resetAction);
                 }
             })
             .done();

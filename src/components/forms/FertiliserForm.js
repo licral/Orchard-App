@@ -37,19 +37,7 @@ const fertiliserForm = class FertiliserForm extends Component{
             })
             .then((response) => {
                 if(response.ok){
-                    console.log("Added to fertiliser record");
-//                    const resetAction = NavigationActions.reset({
-//                        index: 0,
-//                        actions: [
-//                            NavigationActions.navigate({
-//                                routeName: 'Calendar',
-//                                params: {
-//                                    message: "Plant has been registered."
-//                                }
-//                            })
-//                        ]
-//                    });
-//                    this.props.navigation.dispatch(resetAction);
+                    this.props.navigateHome();
                 }
             })
             .done();
