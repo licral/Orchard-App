@@ -19,9 +19,32 @@ const chemicalForm = class ChemicalForm extends Component{
         }
     }
 
-    record(){
-        console.log("Called in chemical!");
-    }
+    async record(activity_id){
+            var product = this.state.product;
+            var rate = this.state.rate;
+            try{
+                var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
+                fetch('https://orchard-app-java-tomcat.herokuapp.com/record/chemical', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': TOKEN
+                    },
+                    body: 'activity_id=' + encodeURIComponent(activity_id)
+                        + '&product=' + encodeURIComponent(product)
+                        + '&rate=' + encodeURIComponent(rate)
+                })
+                .then((response) => {
+                    if(response.ok){
+                        this.props.navigateHome();
+                    }
+                })
+                .done();
+            } catch (error) {
+                console.log("AsyncStorage error: " + error.message);
+            }
+        }
 
     render () {
         return (

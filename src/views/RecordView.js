@@ -69,11 +69,11 @@ var recordView = class RecordView extends Component{
             );
         } else if(activityType === "Chemical Sprayed"){
             return (
-                <ChemicalForm ref='form' />
+                <ChemicalForm ref='form' navigateHome={this.navigateHome.bind(this)} />
             );
         } else if(activityType === "Harvest"){
             return (
-                <HarvestForm ref='form' />
+                <HarvestForm ref='form' navigateHome={this.navigateHome.bind(this)} />
             );
         }
         else {
