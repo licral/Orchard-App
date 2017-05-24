@@ -10,7 +10,8 @@ import {
     Picker,
     TextInput,
     View,
-    Button
+    Button,
+    ScrollView
 } from 'react-native';
 
 var STORAGE_KEY = 'id-token';
@@ -151,22 +152,24 @@ var recordView = class RecordView extends Component{
             var activityItems = this.getPickerItems(this.state.activityList);
             return (
                 <View style={styles.pageContent}>
-                     <Text>{state.params.plant_id}</Text>
-                     <Picker
-                     selectedValue={this.state.activity}
-                     onValueChange = {(choice) => this.setState({activity: choice})}>
-                         {activityItems}
-                    </Picker>
-                    {this.currentForm()}
-                    <TextInput
-                       style={styles.loginInput}
-                       multiline = {true}
-                       numberOfLines = {4}
-                       onChangeText={(notes) => this.setState({notes: notes})}
-                       value={this.state.notes}
-                       placeholder={"Notes"}
-                       />
-                    <Button onPress={this.record.bind(this)} title="Record" />
+                    <ScrollView>
+                         <Text>{state.params.plant_id}</Text>
+                         <Picker
+                         selectedValue={this.state.activity}
+                         onValueChange = {(choice) => this.setState({activity: choice})}>
+                             {activityItems}
+                        </Picker>
+                        {this.currentForm()}
+                        <TextInput
+                           style={styles.loginInput}
+                           multiline = {true}
+                           numberOfLines = {4}
+                           onChangeText={(notes) => this.setState({notes: notes})}
+                           value={this.state.notes}
+                           placeholder={"Notes"}
+                           />
+                        <Button onPress={this.record.bind(this)} title="Record" />
+                    </ScrollView>
                 </View>
             );
         }
