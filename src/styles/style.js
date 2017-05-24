@@ -29,6 +29,9 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: 'gray',
         margin: 10
+    },
+    activityItems: {
+        backgroundColor: 'yellow'
     }
 });
 

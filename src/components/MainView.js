@@ -12,7 +12,7 @@ const InnerNavigator = StackNavigator({
     Calendar: {
         screen: CalendarView,
         navigationOptions: ({navigation}) => ({
-            headerTitle: "Date Placeholder",
+            headerTitle: "Activity History",
             headerLeft: <DrawerButton navigation={navigation} />,
         })
     },
@@ -45,7 +45,7 @@ const OuterNavigator = DrawerNavigator({
     Home: {
         screen: InnerNavigator,
         navigationOptions: () => ({
-            title: "View History"
+            title: "Activity History"
         })
     }
 }, {
