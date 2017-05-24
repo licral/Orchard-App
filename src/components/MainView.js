@@ -5,6 +5,7 @@ import DrawerButton from './DrawerButton.js';
 import CalendarView from '../views/CalendarView.js';
 import BarcodeView from '../views/BarcodeView.js';
 import RegisterView from '../views/RegisterView.js';
+import RecordView from '../views/RecordView.js';
 import styles from '../styles/style.js';
 
 const InnerNavigator = StackNavigator({
@@ -25,6 +26,12 @@ const InnerNavigator = StackNavigator({
         screen: RegisterView,
         navigationOptions: () => ({
             headerTitle: "Register Plant Details"
+        })
+    },
+    Record: {
+        screen: RecordView,
+        navigationOptions: () => ({
+            headerTitle: "Record Activity Details"
         })
     }
 }, {

@@ -22,7 +22,7 @@ var calendarView = class CalendarView extends Component {
                     <ActionButton.Item
                         buttonColor="#ff0000"
                         title="Record New Activity"
-                        onPress={() => {navigate('Barcode')}}>
+                        onPress={() => {navigate('Barcode', {action: 'record'})}}>
                         <Icon name="create" style={styles.newButton} />
                     </ActionButton.Item>
                     <ActionButton.Item
