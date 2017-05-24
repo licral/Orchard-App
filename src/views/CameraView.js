@@ -18,7 +18,7 @@ var cameraView = class CameraView extends Component{
         const {navigate} = this.props.navigation;
         const {state} = this.props.navigation;
         if(state.params.action === "register"){
-            navigate('Register', {code: e.data});
+            navigate('Register', {plant_id: e.data});
         } else {
             console.log(state.params.action);
         }

@@ -22,9 +22,9 @@ const customDrawer = class CustomDrawer extends Component{
                      },
                      body: 'token=' + encodeURIComponent(TOKEN)
                  })
-                 .then((response) => {
+                 .then(async (response) => {
                      if(response.ok){
-                          AsyncStorage.removeItem(STORAGE_KEY);
+                          await AsyncStorage.removeItem(STORAGE_KEY);
                      } else {
                          console.log("Not ok");
                      }
