@@ -4,8 +4,7 @@ import {
     AsyncStorage,
     Text,
     View,
-    TextInput,
-    Button
+    ActivityIndicator
 } from 'react-native';
 
 var STORAGE_KEY = 'id-token';
@@ -14,17 +13,16 @@ var activityView = class ActivityView extends Component{
     constructor(){
         super();
         this.state = {
-            barcode: "",
-            message: ""
+            retrieved: "",
+            activityInfo: {}
         }
     }
 
-    async proceed(){
-        const {navigate} = this.props.navigation;
-        var code = this.state.barcode;
+    async getActivityInfo(){
+        const {state} = this.props.navigation;
         try{
             var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
-            fetch('https://orchard-app-java-tomcat.herokuapp.com/check/' + code, {
+            fetch('https://orchard-app-java-tomcat.herokuapp.com/get/activity/' + state.params.activity_id, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
@@ -34,18 +32,10 @@ var activityView = class ActivityView extends Component{
             })
             .then((response) => {
                 if(response.ok){
-                    response.text().then((responseData) => {
-                        if(responseData === "Not Registered"){
-                            navigate('Register', {plant_id: code});
-                        } else {
-                            navigate('Record', {plant_id: code});
-                        }
-                        this.setState({message: ""});
-                    });
-                } else {
-                    response.text().then((responseData) => {
+                    response.json().then((responseData) => {
                         console.log(responseData);
-                        this.setState({message: responseData});
+                        this.setState({activityInfo: responseData});
+                        this.setState({retrieved: "Done"});
                     });
                 }
             })
@@ -55,12 +45,37 @@ var activityView = class ActivityView extends Component{
         }
     }
 
+    processActivity(){
+        var rawData = this.state.activityInfo;
+        var activityInfo = [];
+        Object.keys(rawData).map(function(i){
+            activityInfo.push(
+                <Text>{i} : {rawData[i]}</Text>
+            );
+        });
+        return activityInfo;
+    }
+
     render () {
-        return (
-            <View style={styles.pageContent}>
-                <Text>This is an activity</Text>
-            </View>
-        );
+        if(this.state.retrieved === ""){
+            this.getActivityInfo();
+        }
+        if(this.state.retrieved === ""){
+            return (
+                <ActivityIndicator
+                    animating={true}
+                    style={{height: 80}}
+                    size="large"
+                  />
+            );
+        } else {
+            var activityInfo = this.processActivity();
+            return (
+                <View style={styles.pageContent}>
+                    {activityInfo}
+                </View>
+            );
+        }
     }
 }
 
