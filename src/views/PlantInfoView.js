@@ -97,10 +97,10 @@ var plantInfoView = class PlantInfoView extends Component{
             var activity = rawData[i];
             activities.push(
                 <TouchableNativeFeedback onPress={this._navigateToActivity.bind(this, activity["activity_id"])}>
-                    <View>
-                        <Text>Plant ID: {activity["plant_id"]}</Text>
+                    <View style={styles.activityItem}>
+                        <Text style={styles.itemHeader}>Plant ID: {activity["plant_id"]}</Text>
                         <Text>{activity["activity_type"]} - {activity["species"]}</Text>
-                        <Text>{activity["date"]} {activity["time"]}</Text>
+                        <Text style={styles.itemDateTime}>{activity["date"]} {activity["time"]}</Text>
                     </View>
                 </TouchableNativeFeedback>
             );

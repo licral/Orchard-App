@@ -29,6 +29,19 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: 'gray',
         margin: 10
+    },
+    activityItem: {
+        marginHorizontal: 10,
+        marginBottom: 10,
+        backgroundColor: 'white',
+        padding: 5
+    },
+    itemHeader: {
+        fontSize: 16,
+        color: 'black'
+    },
+    itemDateTime: {
+        fontSize: 10
     }
 });
 
