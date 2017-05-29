@@ -24,7 +24,8 @@ var barcodeView = TabNavigator({
         indicatorStyle: styles.tabIndicator,
         activeTintColor: '#4d4d4d',
         inactiveTintColor: '#8c8c8c'
-    }
+    },
+    backBehavior: "none"
 });
 
 export default barcodeView;

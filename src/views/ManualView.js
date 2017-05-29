@@ -20,38 +20,42 @@ var manualView = class ManualView extends Component{
     }
 
     async proceed(){
-        const {navigate} = this.props.navigation;
-        var code = this.state.barcode;
-        try{
-            var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
-            fetch('https://orchard-app-java-tomcat.herokuapp.com/check/' + code, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': TOKEN
-                }
-            })
-            .then((response) => {
-                if(response.ok){
-                    response.text().then((responseData) => {
-                        if(responseData === "Not Registered"){
-                            navigate('Register', {plant_id: code});
-                        } else {
-                            navigate('Record', {plant_id: code});
-                        }
-                        this.setState({message: ""});
-                    });
-                } else {
-                    response.text().then((responseData) => {
-                        console.log(responseData);
-                        this.setState({message: responseData});
-                    });
-                }
-            })
-            .done();
-        } catch (error) {
-            console.log("AsyncStorage error: " + error.message);
+        if(this.state.barcode === ""){
+            this.setState({message: "Please enter a code first"});
+        } else {
+            const {navigate} = this.props.navigation;
+            var code = this.state.barcode;
+            try{
+                var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
+                fetch('https://orchard-app-java-tomcat.herokuapp.com/check/' + code, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': TOKEN
+                    }
+                })
+                .then((response) => {
+                    if(response.ok){
+                        response.text().then((responseData) => {
+                            if(responseData === "Not Registered"){
+                                navigate('Register', {plant_id: code});
+                            } else {
+                                navigate('Record', {plant_id: code});
+                            }
+                            this.setState({message: ""});
+                        });
+                    } else {
+                        response.text().then((responseData) => {
+                            console.log(responseData);
+                            this.setState({message: responseData});
+                        });
+                    }
+                })
+                .done();
+            } catch (error) {
+                console.log("AsyncStorage error: " + error.message);
+            }
         }
     }
 
