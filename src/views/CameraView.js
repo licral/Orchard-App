@@ -18,7 +18,6 @@ var cameraView = class CameraView extends Component{
     }
 
     async onSuccess(e){
-        console.log("Read QR");
         const {navigate} = this.props.navigation;
         try{
             var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);

@@ -23,15 +23,12 @@ const styles = StyleSheet.create({
     },
     pageContent: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: '#f7f6f6'
     },
     loginInput: {
         borderBottomWidth: 1,
         borderBottomColor: 'gray',
         margin: 10
-    },
-    activityItems: {
-        backgroundColor: 'yellow'
     }
 });
 
