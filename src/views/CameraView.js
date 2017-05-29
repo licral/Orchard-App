@@ -13,11 +13,12 @@ var cameraView = class CameraView extends Component{
     constructor(){
         super();
         this.state = {
-            data: "No data yet"
+            message: ""
         };
     }
 
     async onSuccess(e){
+        console.log("Read QR");
         const {navigate} = this.props.navigation;
         try{
             var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
@@ -31,9 +32,19 @@ var cameraView = class CameraView extends Component{
             })
             .then((response) => {
                 if(response.ok){
-                    navigate('Record', {plant_id: e.data});
+                    response.text().then((responseData) => {
+                        if(responseData === "Not Registered"){
+                            navigate('Register', {plant_id: e.data});
+                        } else {
+                            navigate('Record', {plant_id: e.data});
+                        }
+                        this.setState({message: ""});
+                    });
                 } else {
-                    navigate('Register', {plant_id: e.data});
+                    response.text().then((responseData) => {
+                        console.log(responseData);
+                        this.setState({message: responseData});
+                    });
                 }
             })
             .done();
@@ -67,10 +78,13 @@ var cameraView = class CameraView extends Component{
             <View style={styles.pageContent}>
                 <QRCodeScanner
                      onRead={this.onSuccess.bind(this)}
+                     reactivate={true}
+                     reactivateTimeout={1000}
                      topViewStyle={{height: 0, flex: 0}}
+                     bottomViewStyle={{height: 0, flex: 0}}
                      />
                 <View>
-                    <Text>{this.state.data}</Text>
+                    <Text>{this.state.message}</Text>
                 </View>
             </View>
         );
