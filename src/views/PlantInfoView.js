@@ -5,7 +5,8 @@ import {
     Text,
     View,
     ActivityIndicator,
-    ScrollView
+    ScrollView,
+    TouchableNativeFeedback
 } from 'react-native';
 
 var STORAGE_KEY = 'id-token';
@@ -79,6 +80,11 @@ var plantInfoView = class PlantInfoView extends Component{
         }
     }
 
+    _navigateToActivity(id){
+        const {navigate} = this.props.navigation;
+        navigate('Activity', {activity_id: id});
+    }
+
     processActivities(){
         if(this.state.retrievedHistory === "None"){
             return(
@@ -89,11 +95,15 @@ var plantInfoView = class PlantInfoView extends Component{
         var activities = [];
         for(var i = 0; i < rawData.length; i++){
             var activity = rawData[i];
-            Object.keys(activity).map(function(key){
-                activities.push(
-                    <Text>{key} : {activity[key]}</Text>
-                );
-            });
+            activities.push(
+                <TouchableNativeFeedback onPress={this._navigateToActivity.bind(this, activity["activity_id"])}>
+                    <View>
+                        <Text>Plant ID: {activity["plant_id"]}</Text>
+                        <Text>{activity["activity_type"]} - {activity["species"]}</Text>
+                        <Text>{activity["date"]} {activity["time"]}</Text>
+                    </View>
+                </TouchableNativeFeedback>
+            );
         }
         return activities;
     }
