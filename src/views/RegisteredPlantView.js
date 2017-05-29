@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {TabNavigator} from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import CameraView from './CameraView.js';
-import ManualView from './ManualView.js';
+import PlantInfoView from './PlantInfoView.js';
+import RecordView from './RecordView.js';
 import styles from '../styles/style.js';
 import {
     Text,
@@ -11,12 +11,12 @@ import {
     Button
 } from 'react-native';
 
-var barcodeView = TabNavigator({
-    Camera: {
-        screen: CameraView
+var registeredPlantView = TabNavigator({
+    Record: {
+        screen: RecordView
     },
-    Manual: {
-        screen: ManualView
+    PlantInfo: {
+        screen: PlantInfoView
     }
 }, {
     tabBarOptions: {
@@ -27,4 +27,4 @@ var barcodeView = TabNavigator({
     }
 });
 
-export default barcodeView;
+export default registeredPlantView;
