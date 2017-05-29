@@ -18,7 +18,7 @@ var calendarView = class CalendarView extends Component {
         super();
         this.state = {
             retrieved: "",
-            history: {}
+            history: []
         }
     }
 
@@ -48,16 +48,16 @@ var calendarView = class CalendarView extends Component {
     }
 
     processActivities(){
-        var allActivities = this.state.history;
+        var rawData = this.state.history;
         var activities = [];
-        Object.keys(allActivities).map(function(i){
-            var activity = allActivities[i];
-            Object.keys(activity).map(function(j){
+        for(var i = 0; i < rawData.length; i++){
+            var activity = rawData[i];
+            Object.keys(activity).map(function(key){
                 activities.push(
-                    <Text>{j} : {activity[j]}</Text>
+                    <Text>{key} : {activity[key]}</Text>
                 );
             });
-        });
+        }
         return activities;
     }
 
@@ -108,7 +108,6 @@ var calendarView = class CalendarView extends Component {
                 </View>
             );
         }
-
    }
 }
 
