@@ -7,6 +7,7 @@ import BarcodeView from '../views/BarcodeView.js';
 import RegisterView from '../views/RegisterView.js';
 import RecordView from '../views/RecordView.js';
 import RegisteredPlantView from '../views/RegisteredPlantView.js';
+import ActivityView from '../views/ActivityView.js';
 import styles from '../styles/style.js';
 
 const InnerNavigator = StackNavigator({
@@ -33,6 +34,12 @@ const InnerNavigator = StackNavigator({
         screen: RegisteredPlantView,
         navigationOptions: () => ({
             headerTitle: "Record Activity Details"
+        })
+    },
+    Activity: {
+        screen: ActivityView,
+        navigationOptions: () => ({
+            headerTitle: "Activity Details"
         })
     }
 }, {
