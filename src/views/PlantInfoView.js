@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from '../styles/style.js';
+import {Table, Rows} from 'react-native-table-component';
 import {
     AsyncStorage,
     Text,
@@ -95,12 +96,32 @@ var plantInfoView = class PlantInfoView extends Component{
         var activities = [];
         for(var i = 0; i < rawData.length; i++){
             var activity = rawData[i];
+            var date = new Date(activity["date"]);
+            var weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+            var date_string = weekday[date.getDay()] + ", " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+            var time = activity["time"].split(":");
+            var hour = time[0];
+            var minute = time[1];
+            var end = "AM";
+            if(hour >= 12){
+                end = "PM";
+            }
+            if(hour > 12){
+                hour = hour - 12;
+            }
             activities.push(
                 <TouchableNativeFeedback onPress={this._navigateToActivity.bind(this, activity["activity_id"])}>
                     <View style={styles.activityItem}>
+                        <Text>{activity["activity_type"]} - {activity["species"]} - {activity["variety"]}</Text>
                         <Text style={styles.itemHeader}>Plant ID: {activity["plant_id"]}</Text>
-                        <Text>{activity["activity_type"]} - {activity["species"]}</Text>
-                        <Text style={styles.itemDateTime}>{activity["date"]} {activity["time"]}</Text>
+                        <Text style={styles.itemDateTime}>{date_string} {hour}:{minute} {end}</Text>
                     </View>
                 </TouchableNativeFeedback>
             );
@@ -112,9 +133,7 @@ var plantInfoView = class PlantInfoView extends Component{
         var rawData = this.state.plantInfo;
         var plantInfo = [];
         Object.keys(rawData).map(function(i){
-            plantInfo.push(
-                <Text>{i} : {rawData[i]}</Text>
-            );
+            plantInfo.push([i, rawData[i]]);
         });
         return plantInfo;
     }
@@ -140,9 +159,18 @@ var plantInfoView = class PlantInfoView extends Component{
             return(
                 <View style={styles.pageContent}>
                     <ScrollView>
-                        <Text>===PLANT INFO===</Text>
-                        {plantInfo}
-                        <Text>===ACTIVITY HISTORY===</Text>
+                        <View style={styles.dateHeadingView}>
+                            <Text style={styles.dateHeadingText}>Plant Details</Text>
+                        </View>
+                        <Table
+                            style={styles.table}
+                            borderStyle={{borderWidth: 1, borderColor: '#e7e4e4'}}
+                            >
+                            <Rows data={plantInfo} textStyle={styles.rowText} />
+                        </Table>
+                        <View style={styles.dateHeadingView}>
+                            <Text style={styles.dateHeadingText}>Activity History</Text>
+                        </View>
                         {activityHistory}
                     </ScrollView>
                 </View>
