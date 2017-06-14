@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from '../styles/style.js';
+import {Table, Rows} from 'react-native-table-component';
 import {
     AsyncStorage,
     Text,
@@ -33,7 +34,6 @@ var activityView = class ActivityView extends Component{
             .then((response) => {
                 if(response.ok){
                     response.json().then((responseData) => {
-                        console.log(responseData);
                         this.setState({activityInfo: responseData});
                         this.setState({retrieved: "Done"});
                     });
@@ -49,9 +49,7 @@ var activityView = class ActivityView extends Component{
         var rawData = this.state.activityInfo;
         var activityInfo = [];
         Object.keys(rawData).map(function(i){
-            activityInfo.push(
-                <Text>{i} : {rawData[i]}</Text>
-            );
+            activityInfo.push([i, rawData[i]]);
         });
         return activityInfo;
     }
@@ -72,7 +70,12 @@ var activityView = class ActivityView extends Component{
             var activityInfo = this.processActivity();
             return (
                 <View style={styles.pageContent}>
-                    {activityInfo}
+                    <Table
+                        style={styles.table}
+                        borderStyle={{borderWidth: 1, borderColor: '#e7e4e4'}}
+                        >
+                        <Rows data={activityInfo} textStyle={styles.rowText} />
+                    </Table>
                 </View>
             );
         }

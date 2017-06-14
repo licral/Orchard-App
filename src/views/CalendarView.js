@@ -87,10 +87,11 @@ var calendarView = class CalendarView extends Component {
             var hour = time[0];
             var minute = time[1];
             var end = "AM";
+            if(hour >= 12){
+                end = "PM";
+            }
             if(hour > 12){
                 hour = hour - 12;
-            } else if(hour >= 12){
-                end = "PM";
             }
             activities.push(
                 <TouchableNativeFeedback onPress={this._navigateToActivity.bind(this, activity["activity_id"])}>

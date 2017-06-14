@@ -49,6 +49,14 @@ const styles = StyleSheet.create({
     },
     dateHeadingText: {
         fontSize: 16
+    },
+    table: {
+        margin: 10,
+        backgroundColor: 'white'
+    },
+    rowText: {
+        fontSize: 14,
+        margin: 5
     }
 });
 
