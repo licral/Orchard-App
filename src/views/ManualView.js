@@ -70,7 +70,7 @@ var manualView = class ManualView extends Component{
     }
 
     render () {
-        var errorMessage = this.getErrorMessage();
+        var errorMessage = this.get ErrorMessage();
         return (
             <View style={styles.pageContent}>
                 <View style={styles.margin}>

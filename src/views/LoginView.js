@@ -25,6 +25,7 @@ var loginView = class LoginView extends Component{
         this.state = {
             username: "",
             password: "",
+            message: "",
             loading: false
         };
     }
@@ -59,6 +60,7 @@ var loginView = class LoginView extends Component{
                     });
                 } else {
                     console.log("Not ok");
+                    this.setState({message: "Your login credentials are incorrect."});
                 }
             })
             .done();
@@ -79,7 +81,18 @@ var loginView = class LoginView extends Component{
         }
     }
 
+    getErrorMessage(){
+        if(this.state.message == ""){
+            return null;
+        } else {
+            return(
+                <Text style={styles.errorMessage}>{this.state.message}</Text>
+            );
+        }
+    }
+
     render () {
+        var errorMessage = this.getErrorMessage();
         return (
             <Image style={{flex: 1, width: null, height: null}} source={require('../img/splashback.jpg')}>
                 <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'rgba(255,255,255,0.5)', alignItems: 'center', justifyContent: 'center'}}>
@@ -87,6 +100,7 @@ var loginView = class LoginView extends Component{
                         <View style={styles.logo}>
                             <Image source={require('../img/logo.png')} />
                         </View>
+                        {errorMessage}
                         <TextInput
                             underlineColorAndroid="#e7e4e4"
                             onChangeText={(username) => this.setState({username})}
