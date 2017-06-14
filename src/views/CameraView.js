@@ -83,7 +83,7 @@ var cameraView = class CameraView extends Component{
                      bottomViewStyle={{height: 0, flex: 0}}
                      />
                 <View>
-                    <Text>{this.state.message}</Text>
+                    <Text style={styles.errorMessage}>{this.state.message}</Text>
                 </View>
             </View>
         );

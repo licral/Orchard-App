@@ -14,7 +14,8 @@ const harvestForm = class HarvestForm extends Component{
     constructor(){
         super();
         this.state = {
-            weight: "0"
+            weight: "0",
+            weightMessage: ""
         }
     }
 
@@ -43,7 +44,33 @@ const harvestForm = class HarvestForm extends Component{
         }
     }
 
+    check(){
+        var check = true;
+        if(this.state.weight == 0){
+            this.setState({weightMessage: "Please enter a weight"})
+            check = false;
+        } else if(isNaN(this.state.weight) || this.state.weight < 0){
+            this.setState({weightMessage: "Weight is invalid"})
+            check = false;
+        } else {
+            this.setState({weightMessage: ""});
+        }
+
+        return check;
+    }
+
+    getErrorMessage(){
+        if(this.state.weightMessage == ""){
+            return null;
+        } else {
+            return(
+                <Text style={styles.errorMessage}>{this.state.weightMessage}</Text>
+            );
+        }
+    }
+
     render () {
+        var errorMessage = this.getErrorMessage();
         return (
             <View style={styles.container}>
                 <View style={styles.margin}>
@@ -53,6 +80,7 @@ const harvestForm = class HarvestForm extends Component{
                        onChangeText={(value) => this.setState({weight: value})}
                        value={this.state.weight}
                        />
+                    {errorMessage}
                 </View>
             </View>
         );
