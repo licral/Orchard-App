@@ -57,8 +57,9 @@ const styles = StyleSheet.create({
     button: {
         marginHorizontal: 10
     },
-    errorMessageText: {
-        color: '#fe4a49'
+    errorMessage: {
+        color: 'red',
+        fontSize: 11
     },
     label: {
         color: '#fe4a49',
