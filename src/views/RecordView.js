@@ -169,7 +169,7 @@ var recordView = class RecordView extends Component{
                         <View style={styles.margin}>
                             <Text style={styles.label}>Notes</Text>
                             <TextInput
-                           underlineColorAndroid="#e7e4e4"
+                               underlineColorAndroid="#e7e4e4"
                                multiline = {true}
                                numberOfLines = {4}
                                onChangeText={(notes) => this.setState({notes: notes})}

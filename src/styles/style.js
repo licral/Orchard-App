@@ -67,6 +67,15 @@ const styles = StyleSheet.create({
     },
     margin: {
         margin: 10
+    },
+    loginPanel: {
+        backgroundColor: 'white',
+        width: 300,
+        padding: 10
+    },
+    logo: {
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
 

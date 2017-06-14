@@ -7,7 +7,8 @@ import {
     AsyncStorage,
     Button,
     TextInput,
-    ActivityIndicator
+    ActivityIndicator,
+    Image
 } from 'react-native';
 
 var STORAGE_KEY = 'id-token';
@@ -79,28 +80,34 @@ var loginView = class LoginView extends Component{
 
     render () {
         return (
-            <View style={styles.pageContent}>
-                <View style={{flex: 1, backgroundColor: '#80d4ff'}}>
-                    <Text>Logo Placeholder</Text>
+            <Image style={{flex: 1, width: null, height: null}} source={require('../img/splashback.jpg')}>
+                <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'rgba(255,255,255,0.5)', alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={styles.loginPanel}>
+                        <View style={styles.logo}>
+                            <Image source={require('../img/logo_transparent.png')} />
+                        </View>
+                        <TextInput
+                            underlineColorAndroid="#e7e4e4"
+                            onChangeText={(username) => this.setState({username})}
+                            value={this.state.username}
+                            placeholder={"Username"}
+                            />
+                        <TextInput
+                            underlineColorAndroid="#e7e4e4"
+                            secureTextEntry={true}
+                            onChangeText={(password) => this.setState({password})}
+                            value={this.state.password}
+                            placeholder={"Password"}
+                            />
+                        <Button
+                           onPress={this._userLogin.bind(this)}
+                           title="Login"
+                           color="#43a047"
+                           />
+                        {this._isLoading()}
+                    </View>
                 </View>
-                <View style={{flex: 1}}>
-                    <TextInput
-                        style={styles.loginInput}
-                        onChangeText={(username) => this.setState({username})}
-                        value={this.state.username}
-                        placeholder={"Username"}
-                        />
-                    <TextInput
-                        style={styles.loginInput}
-                        secureTextEntry={true}
-                        onChangeText={(password) => this.setState({password})}
-                        value={this.state.password}
-                        placeholder={"Password"}
-                        />
-                    <Button onPress={this._userLogin.bind(this)} title="Login" />
-                    {this._isLoading()}
-                </View>
-            </View>
+            </Image>
         );
     }
 }
