@@ -119,8 +119,8 @@ var plantInfoView = class PlantInfoView extends Component{
             activities.push(
                 <TouchableNativeFeedback onPress={this._navigateToActivity.bind(this, activity["activity_id"])}>
                     <View style={styles.activityItem}>
-                        <Text>{activity["activity_type"]} - {activity["species"]} - {activity["variety"]}</Text>
-                        <Text style={styles.itemHeader}>Plant ID: {activity["plant_id"]}</Text>
+                        <Text style={styles.itemHeader}>{activity["activity_type"]} - {activity["species"]} - {activity["variety"]}</Text>
+                        <Text>Plant ID: {activity["plant_id"]}</Text>
                         <Text style={styles.itemDateTime}>{date_string} {hour}:{minute} {end}</Text>
                     </View>
                 </TouchableNativeFeedback>
@@ -166,7 +166,7 @@ var plantInfoView = class PlantInfoView extends Component{
                             <Rows data={plantInfo} textStyle={styles.rowText} />
                         </Table>
                         <View style={styles.margin}>
-                            <Text style={styles.dateHeading}>Activity History</Text>
+                            <Text style={styles.heading}>Activity History</Text>
                         </View>
                         {activityHistory}
                     </ScrollView>

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     itemDateTime: {
         fontSize: 10
     },
-    dateHeading: {
+    heading: {
         fontSize: 16
     },
     table: {
@@ -76,6 +76,13 @@ const styles = StyleSheet.create({
     logo: {
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    drawerBanner: {
+        backgroundColor: '#43a047'
+    },
+    sideHeading: {
+        fontSize: 16,
+        color: 'white'
     }
 });
 

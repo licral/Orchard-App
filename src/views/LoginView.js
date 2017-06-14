@@ -55,6 +55,7 @@ var loginView = class LoginView extends Component{
                 if(response.ok){
                     response.json().then((responseData) => {
                         this._setToken(STORAGE_KEY, responseData.id_token);
+                        this._setToken('username', username);
                     });
                 } else {
                     console.log("Not ok");
@@ -84,7 +85,7 @@ var loginView = class LoginView extends Component{
                 <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'rgba(255,255,255,0.5)', alignItems: 'center', justifyContent: 'center'}}>
                     <View style={styles.loginPanel}>
                         <View style={styles.logo}>
-                            <Image source={require('../img/logo_transparent.png')} />
+                            <Image source={require('../img/logo.png')} />
                         </View>
                         <TextInput
                             underlineColorAndroid="#e7e4e4"

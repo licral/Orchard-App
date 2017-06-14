@@ -79,7 +79,7 @@ var calendarView = class CalendarView extends Component {
                 }
                 activities.push(
                     <View style={styles.margin}>
-                        <Text style={styles.dateHeading}>{date_string}</Text>
+                        <Text style={styles.heading}>{date_string}</Text>
                     </View>
                 );
             }
