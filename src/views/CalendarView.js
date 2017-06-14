@@ -56,14 +56,48 @@ var calendarView = class CalendarView extends Component {
     processActivities(){
         var rawData = this.state.history;
         var activities = [];
+        var today = new Date();
+        var weekday = new Array(7);
+        weekday[0] = "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+        var current;
         for(var i = 0; i < rawData.length; i++){
             var activity = rawData[i];
+            var date = new Date(activity["date"]);
+            if(current == undefined || date.getDate() != current.getDate() || date.getMonth() != current.getMonth() || date.getFullYear() != current.getFullYear()){
+                current = date;
+                var date_string;
+                if(today.getDate() == current.getDate() && today.getMonth() == current.getMonth() && today.getFullYear() == current.getFullYear()){
+                    date_string = "Today";
+                } else {
+                    date_string = weekday[current.getDay()] + ", " + current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
+                }
+                activities.push(
+                    <View style={styles.dateHeadingView}>
+                        <Text style={styles.dateHeadingText}>{date_string}</Text>
+                    </View>
+                );
+            }
+            var time = activity["time"].split(":");
+            var hour = time[0];
+            var minute = time[1];
+            var end = "AM";
+            if(hour > 12){
+                hour = hour - 12;
+            } else if(hour >= 12){
+                end = "PM";
+            }
             activities.push(
                 <TouchableNativeFeedback onPress={this._navigateToActivity.bind(this, activity["activity_id"])}>
                     <View style={styles.activityItem}>
-                        <Text style={styles.itemHeader}>Plant ID: {activity["plant_id"]}</Text>
-                        <Text>{activity["activity_type"]} - {activity["species"]}</Text>
-                        <Text style={styles.itemDateTime}>{activity["date"]} {activity["time"]}</Text>
+                        <Text style={styles.itemHeader}>{activity["activity_type"]} - {activity["species"]} - {activity["variety"]}</Text>
+                        <Text>Plant ID: {activity["plant_id"]}</Text>
+                        <Text style={styles.itemDateTime}>{hour}:{minute} {end}</Text>
                     </View>
                 </TouchableNativeFeedback>
             );

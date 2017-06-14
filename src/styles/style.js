@@ -42,6 +42,13 @@ const styles = StyleSheet.create({
     },
     itemDateTime: {
         fontSize: 10
+    },
+    dateHeadingView: {
+        marginHorizontal: 10,
+        marginVertical: 10,
+    },
+    dateHeadingText: {
+        fontSize: 16
     }
 });
 
