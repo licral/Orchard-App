@@ -159,17 +159,14 @@ var plantInfoView = class PlantInfoView extends Component{
             return(
                 <View style={styles.pageContent}>
                     <ScrollView>
-                        <View style={styles.dateHeadingView}>
-                            <Text style={styles.dateHeadingText}>Plant Details</Text>
-                        </View>
                         <Table
                             style={styles.table}
                             borderStyle={{borderWidth: 1, borderColor: '#e7e4e4'}}
                             >
                             <Rows data={plantInfo} textStyle={styles.rowText} />
                         </Table>
-                        <View style={styles.dateHeadingView}>
-                            <Text style={styles.dateHeadingText}>Activity History</Text>
+                        <View style={styles.margin}>
+                            <Text style={styles.dateHeading}>Activity History</Text>
                         </View>
                         {activityHistory}
                     </ScrollView>

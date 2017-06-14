@@ -46,12 +46,14 @@ const harvestForm = class HarvestForm extends Component{
     render () {
         return (
             <View style={styles.container}>
-                <TextInput
-                   style={styles.loginInput}
-                   onChangeText={(value) => this.setState({weight: value})}
-                   value={this.state.weight}
-                   placeholder={"Weight"}
-                   />
+                <View style={styles.margin}>
+                    <Text style={styles.label}>Weight</Text>
+                    <TextInput
+                       underlineColorAndroid="#e7e4e4"
+                       onChangeText={(value) => this.setState({weight: value})}
+                       value={this.state.weight}
+                       />
+                </View>
             </View>
         );
     }

@@ -153,22 +153,36 @@ var recordView = class RecordView extends Component{
             return (
                 <View style={styles.pageContent}>
                     <ScrollView>
-                         <Text>{state.params.plant_id}</Text>
-                         <Picker
-                         selectedValue={this.state.activity}
-                         onValueChange = {(choice) => this.setState({activity: choice})}>
-                             {activityItems}
-                        </Picker>
+                        <View style={styles.margin}>
+                            <Text style={styles.dateHeadingText}>Plant ID: {state.params.plant_id}</Text>
+                        </View>
+                        <View style={styles.margin}>
+                            <Text style={styles.label}>activity Type</Text>
+                            <Picker
+                               selectedValue={this.state.activity}
+                               onValueChange = {(choice) => this.setState({activity: choice})}
+                               >
+                                {activityItems}
+                            </Picker>
+                        </View>
                         {this.currentForm()}
-                        <TextInput
-                           style={styles.loginInput}
-                           multiline = {true}
-                           numberOfLines = {4}
-                           onChangeText={(notes) => this.setState({notes: notes})}
-                           value={this.state.notes}
-                           placeholder={"Notes"}
-                           />
-                        <Button onPress={this.record.bind(this)} title="Record" />
+                        <View style={styles.margin}>
+                            <Text style={styles.label}>Notes</Text>
+                            <TextInput
+                           underlineColorAndroid="#e7e4e4"
+                               multiline = {true}
+                               numberOfLines = {4}
+                               onChangeText={(notes) => this.setState({notes: notes})}
+                               value={this.state.notes}
+                               />
+                        </View>
+                        <View style={styles.margin}>
+                            <Button
+                               onPress={this.record.bind(this)}
+                               title="Record"
+                               color="#fe4a49"
+                               />
+                        </View>
                     </ScrollView>
                 </View>
             );

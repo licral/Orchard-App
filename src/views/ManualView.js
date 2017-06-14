@@ -59,17 +59,37 @@ var manualView = class ManualView extends Component{
         }
     }
 
+    getErrorMessage(){
+        if(this.state.message == ""){
+            return null;
+        } else {
+            return(
+                <View style={styles.margin}>
+                    <Text style={styles.errorMessage}>{this.state.message}</Text>
+                </View>
+            );
+        }
+    }
+
     render () {
+        var errorMessage = this.getErrorMessage();
         return (
             <View style={styles.pageContent}>
-                <Text>{this.state.message}</Text>
+                {errorMessage}
                 <TextInput
-                   style={styles.loginInput}
+                   style={styles.margin}
+                   underlineColorAndroid="#e7e4e4"
                    onChangeText={(value) => this.setState({barcode: value})}
                    value={this.state.barcode}
-                   placeholder={"Barcode"}
+                   placeholder={"Enter plant ID here"}
                    />
-                   <Button onPress={this.proceed.bind(this)} title="Proceed" />
+                    <View style={styles.button}>
+                        <Button
+                           onPress={this.proceed.bind(this)}
+                           title="Submit"
+                           color="#fe4a49"
+                           />
+                    </View>
             </View>
         );
     }

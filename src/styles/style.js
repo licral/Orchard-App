@@ -7,10 +7,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#43a047'
     },
     tabBar: {
-        backgroundColor: 'white'
+        backgroundColor: '#72bb53'
     },
     tabIndicator: {
-        backgroundColor: '#43a047'
+        backgroundColor: '#fe4a49'
     },
     headerLeftIcon: {
         color: 'white',
@@ -43,11 +43,7 @@ const styles = StyleSheet.create({
     itemDateTime: {
         fontSize: 10
     },
-    dateHeadingView: {
-        marginHorizontal: 10,
-        marginVertical: 10,
-    },
-    dateHeadingText: {
+    dateHeading: {
         fontSize: 16
     },
     table: {
@@ -57,6 +53,19 @@ const styles = StyleSheet.create({
     rowText: {
         fontSize: 14,
         margin: 5
+    },
+    button: {
+        marginHorizontal: 10
+    },
+    errorMessageText: {
+        color: '#fe4a49'
+    },
+    label: {
+        color: '#fe4a49',
+        fontSize: 11
+    },
+    margin: {
+        margin: 10
     }
 });
 

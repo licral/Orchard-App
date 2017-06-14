@@ -21,7 +21,7 @@ const InnerNavigator = StackNavigator({
     Barcode: {
         screen: BarcodeView,
         navigationOptions: () => ({
-            headerTitle: "Enter Barcode"
+            headerTitle: "Enter Plant ID"
         })
     },
     Register: {

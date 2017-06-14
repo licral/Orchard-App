@@ -7,7 +7,8 @@ import {
     View,
     Picker,
     TextInput,
-    Button
+    Button,
+    ScrollView
 } from 'react-native';
 
 var STORAGE_KEY = 'id-token';
@@ -153,37 +154,58 @@ var registerView = class RegisterView extends Component {
             var speciesItems = this.getPickerItems(this.state.speciesList);
             var varietyItems = this.getPickerItems(this.state.varietyList);
             return(
-               <View style={styles.pageContent}>
-                   <Text>{state.params.plant_id}</Text>
-                   <Picker
-                    selectedValue={this.state.species}
-                    onValueChange = {(choice) => {
-                        this.setState({species: choice});
-                        this.getVariety();
-                        }}>
-                        {speciesItems}
-                   </Picker>
-                   <Picker
-                    selectedValue={this.state.variety}
-                    onValueChange = {(choice) => this.setState({variety: choice})}>
-                        {varietyItems}
-                   </Picker>
-                   <TextInput
-                       style={styles.loginInput}
-                       onChangeText={(visualt) => this.setState({visualTag: visualt})}
-                       value={this.state.visualTag}
-                       placeholder={"Visual Tag"}
-                       />
-                   <TextInput
-                       style={styles.loginInput}
-                       multiline = {true}
-                       numberOfLines = {4}
-                       onChangeText={(notes) => this.setState({notes: notes})}
-                       value={this.state.notes}
-                       placeholder={"Notes"}
-                       />
-                    <Button onPress={this.registerPlant.bind(this)} title="Register" />
-               </View>
+                <View style={styles.pageContent}>
+                    <ScrollView>
+                    <View style={styles.margin}>
+                        <Text style={styles.dateHeadingText}>Plant ID: {state.params.plant_id}</Text>
+                    </View>
+                    <View style={styles.margin}>
+                        <Text style={styles.label}>Species</Text>
+                        <Picker
+                           selectedValue={this.state.species}
+                           onValueChange = {(choice) => {
+                            this.setState({species: choice});
+                            this.getVariety();
+                            }}>
+                            {speciesItems}
+                        </Picker>
+                    </View>
+                    <View style={styles.margin}>
+                        <Text style={styles.label}>Variety</Text>
+                        <Picker
+                           selectedValue={this.state.variety}
+                           onValueChange = {(choice) => this.setState({variety: choice})}
+                           >
+                            {varietyItems}
+                        </Picker>
+                    </View>
+                    <View style={styles.margin}>
+                        <Text style={styles.label}>Visual Tag</Text>
+                        <TextInput
+                           underlineColorAndroid="#e7e4e4"
+                           onChangeText={(visualt) => this.setState({visualTag: visualt})}
+                           value={this.state.visualTag}
+                           />
+                    </View>
+                    <View style={styles.margin}>
+                        <Text style={styles.label}>Notes</Text>
+                        <TextInput
+                           underlineColorAndroid="#e7e4e4"
+                           multiline = {true}
+                           numberOfLines = {4}
+                           onChangeText={(notes) => this.setState({notes: notes})}
+                           value={this.state.notes}
+                           />
+                    </View>
+                    <View style={styles.margin}>
+                        <Button
+                           onPress={this.registerPlant.bind(this)}
+                           title="Register"
+                           color="#fe4a49"
+                           />
+                    </View>
+                    </ScrollView>
+                </View>
             );
         }
     }

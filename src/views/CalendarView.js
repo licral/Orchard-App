@@ -78,8 +78,8 @@ var calendarView = class CalendarView extends Component {
                     date_string = weekday[current.getDay()] + ", " + current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
                 }
                 activities.push(
-                    <View style={styles.dateHeadingView}>
-                        <Text style={styles.dateHeadingText}>{date_string}</Text>
+                    <View style={styles.margin}>
+                        <Text style={styles.dateHeading}>{date_string}</Text>
                     </View>
                 );
             }

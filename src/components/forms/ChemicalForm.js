@@ -49,18 +49,22 @@ const chemicalForm = class ChemicalForm extends Component{
     render () {
         return (
             <View style={styles.container}>
-                <TextInput
-                   style={styles.loginInput}
-                   onChangeText={(value) => this.setState({product: value})}
-                   value={this.state.product}
-                   placeholder={"Product"}
-                   />
-                <TextInput
-                   style={styles.loginInput}
-                   onChangeText={(value) => this.setState({rate: value})}
-                   value={this.state.rate}
-                   placeholder={"Rate"}
-                   />
+                <View style={styles.margin}>
+                    <Text style={styles.label}>Product</Text>
+                    <TextInput
+                       underlineColorAndroid="#e7e4e4"
+                       onChangeText={(value) => this.setState({product: value})}
+                       value={this.state.product}
+                       />
+                </View>
+                <View style={styles.margin}>
+                    <Text style={styles.label}>Rate</Text>
+                    <TextInput
+                       underlineColorAndroid="#e7e4e4"
+                       onChangeText={(value) => this.setState({rate: value})}
+                       value={this.state.rate}
+                       />
+                </View>
             </View>
         );
     }
