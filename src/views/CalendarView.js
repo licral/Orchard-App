@@ -19,7 +19,8 @@ var calendarView = class CalendarView extends Component {
         super();
         this.state = {
             retrieved: "",
-            history: []
+            history: [],
+            none: false
         }
     }
 
@@ -40,6 +41,9 @@ var calendarView = class CalendarView extends Component {
                         this.setState({history: responseData});
                         this.setState({retrieved: "Done"});
                     });
+                } else {
+                    this.setState({none: true});
+                    this.setState({retrieved: "Done"});
                 }
             })
             .done();
@@ -118,6 +122,38 @@ var calendarView = class CalendarView extends Component {
                     style={{height: 80}}
                     size="large"
                   />
+            );
+        } else if(this.state.none) {
+            return(
+                <View style={styles.pageContent}>
+                    <StatusBar
+                        backgroundColor="#43a047"
+                        barStyle="light-content"
+                        />
+                    <View>
+                        <Text>No Activities Found</Text>
+                    </View>
+                    <ActionButton buttonColor="rgba(255,0,0,1)">
+                        <ActionButton.Item
+                            buttonColor="#ff0000"
+                            title="Record New Activity"
+                            onPress={() => {
+                                this.setState({retrieved: ""});
+                                navigate('Barcode', {action: 'record'});
+                                }}>
+                            <Icon name="create" style={styles.newButton} />
+                        </ActionButton.Item>
+                        <ActionButton.Item
+                            buttonColor="#ff0000"
+                            title="Register New Plant"
+                            onPress={() => {
+                                this.setState({retrieved: ""});
+                                navigate('Barcode', {action: 'register'});
+                                }}>
+                            <Icon name="local-florist" style={styles.newButton} />
+                        </ActionButton.Item>
+                    </ActionButton>
+                </View>
             );
         } else {
             var activityHistory = this.processActivities();
