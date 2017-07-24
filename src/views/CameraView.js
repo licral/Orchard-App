@@ -13,7 +13,7 @@ var cameraView = class CameraView extends Component{
     constructor(){
         super();
         this.state = {
-            message: ""
+            message: "Hold camera above a QRCode to scan"
         };
     }
 
@@ -37,11 +37,10 @@ var cameraView = class CameraView extends Component{
                         } else {
                             navigate('Record', {plant_id: e.data});
                         }
-                        this.setState({message: ""});
+                        this.setState({message: "Hold camera above a QRCode to scan"});
                     });
                 } else {
                     response.text().then((responseData) => {
-                        console.log(responseData);
                         this.setState({message: responseData});
                     });
                 }
@@ -79,12 +78,9 @@ var cameraView = class CameraView extends Component{
                      onRead={this.onSuccess.bind(this)}
                      reactivate={true}
                      reactivateTimeout={1000}
-                     topViewStyle={{height: 0, flex: 0}}
-                     bottomContent={<Text>Hold camera above a QRCode to scan</Text>}
+                     bottomContent={<Text>{this.state.message}</Text>}
+                     topViewStyle={{flex: 0}}
                      />
-                <View>
-                    <Text style={styles.errorMessage}>{this.state.message}</Text>
-                </View>
             </View>
         );
     }
