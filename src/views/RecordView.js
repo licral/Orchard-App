@@ -170,10 +170,10 @@ var recordView = class RecordView extends Component{
                 <View style={styles.pageContent}>
                     <ScrollView>
                         <View style={styles.margin}>
-                            <Text style={styles.dateHeadingText}>Plant ID: {state.params.plant_id}</Text>
+                            <Text style={styles.heading}>Plant ID: {state.params.plant_id}</Text>
                         </View>
                         <View style={styles.margin}>
-                            <Text style={styles.label}>activity Type</Text>
+                            <Text style={styles.label}>*Activity Type</Text>
                             <Picker
                                selectedValue={this.state.activity}
                                onValueChange = {(choice) => this.setState({activity: choice})}

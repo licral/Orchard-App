@@ -96,7 +96,7 @@ const chemicalForm = class ChemicalForm extends Component{
         return (
             <View style={styles.container}>
                 <View style={styles.margin}>
-                    <Text style={styles.label}>Product</Text>
+                    <Text style={styles.label}>*Product</Text>
                     <TextInput
                        underlineColorAndroid="#e7e4e4"
                        onChangeText={(value) => this.setState({product: value})}
@@ -105,7 +105,7 @@ const chemicalForm = class ChemicalForm extends Component{
                     {productError}
                 </View>
                 <View style={styles.margin}>
-                    <Text style={styles.label}>Rate</Text>
+                    <Text style={styles.label}>*Rate</Text>
                     <TextInput
                        underlineColorAndroid="#e7e4e4"
                        onChangeText={(value) => this.setState({rate: value})}

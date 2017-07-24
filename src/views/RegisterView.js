@@ -167,10 +167,10 @@ var registerView = class RegisterView extends Component {
                 <View style={styles.pageContent}>
                     <ScrollView>
                     <View style={styles.margin}>
-                        <Text style={styles.dateHeadingText}>Plant ID: {state.params.plant_id}</Text>
+                        <Text style={styles.heading}>Plant ID: {state.params.plant_id}</Text>
                     </View>
                     <View style={styles.margin}>
-                        <Text style={styles.label}>Species</Text>
+                        <Text style={styles.label}>*Species</Text>
                         <Picker
                            selectedValue={this.state.species}
                            onValueChange = {(choice) => {
@@ -181,7 +181,7 @@ var registerView = class RegisterView extends Component {
                         </Picker>
                     </View>
                     <View style={styles.margin}>
-                        <Text style={styles.label}>Variety</Text>
+                        <Text style={styles.label}>*Variety</Text>
                         <Picker
                            selectedValue={this.state.variety}
                            onValueChange = {(choice) => this.setState({variety: choice})}

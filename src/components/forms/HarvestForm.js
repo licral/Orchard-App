@@ -74,7 +74,7 @@ const harvestForm = class HarvestForm extends Component{
         return (
             <View style={styles.container}>
                 <View style={styles.margin}>
-                    <Text style={styles.label}>Weight</Text>
+                    <Text style={styles.label}>*Weight</Text>
                     <TextInput
                        underlineColorAndroid="#e7e4e4"
                        onChangeText={(value) => this.setState({weight: value})}
