@@ -9,7 +9,8 @@ import {
     StatusBar,
     ActivityIndicator,
     ScrollView,
-    TouchableNativeFeedback
+    TouchableNativeFeedback,
+    RefreshControl
 } from 'react-native';
 
 var STORAGE_KEY = 'id-token';
@@ -20,7 +21,8 @@ var calendarView = class CalendarView extends Component {
         this.state = {
             retrieved: "",
             history: [],
-            none: false
+            none: false,
+            refreshing: false
         }
     }
 
@@ -46,6 +48,7 @@ var calendarView = class CalendarView extends Component {
                     this.setState({none: true});
                     this.setState({retrieved: "Done"});
                 }
+                this.setState({refreshing: false});
             })
             .done();
         } catch (error) {
@@ -111,6 +114,11 @@ var calendarView = class CalendarView extends Component {
         return activities;
     }
 
+    _onRefresh(){
+        this.setState({refreshing: true});
+        this.setState({retrieved: ""});
+    }
+
    render() {
         if(this.state.retrieved === ""){
             this.getActivityHistory();
@@ -164,7 +172,13 @@ var calendarView = class CalendarView extends Component {
                         backgroundColor="#43a047"
                         barStyle="light-content"
                         />
-                    <ScrollView>
+                    <ScrollView
+                      refreshControl={
+                        <RefreshControl
+                          refreshing={this.state.refreshing}
+                          onRefresh={this._onRefresh.bind(this)}
+                        />}
+                      >
                         {activityHistory}
                     </ScrollView>
                     <ActionButton buttonColor="rgba(255,0,0,1)">
