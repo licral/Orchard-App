@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styles from '../styles/style.js';
-import {Table, Rows} from 'react-native-table-component';
 import {
     AsyncStorage,
     Text,

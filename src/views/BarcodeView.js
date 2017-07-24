@@ -16,7 +16,10 @@ var barcodeView = TabNavigator({
         screen: CameraView
     },
     Manual: {
-        screen: ManualView
+        screen: ManualView,
+        navigationOptions: () => ({
+            title: "Enter Code"
+        })
     }
 }, {
     tabBarOptions: {
