@@ -5,6 +5,7 @@ import {
     AsyncStorage,
     Text,
     View,
+    ScrollView,
     ActivityIndicator
 } from 'react-native';
 
@@ -65,7 +66,12 @@ var activityView = class ActivityView extends Component{
                 } else {
                     date_string = weekday[current.getDay()] + ", " + current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
                 }
-                activityInfo.push([i, date_string]);
+                activityInfo.push(
+                    <View style={styles.margin}>
+                        <Text style={styles.itemHeader}>{i}</Text>
+                        <Text>{date_string}</Text>
+                    </View>
+                );
             } else if(i === "Time") {
                 var time = rawData[i].split(":");
                 var hour = time[0];
@@ -77,9 +83,19 @@ var activityView = class ActivityView extends Component{
                 if(hour > 12){
                     hour = hour - 12;
                 }
-                activityInfo.push([i, hour + ':' + minute + ' ' + end]);
+                activityInfo.push(
+                    <View style={styles.margin}>
+                        <Text style={styles.itemHeader}>{i}</Text>
+                        <Text>{hour}:{minute} {end}</Text>
+                    </View>
+                );
             }else {
-                activityInfo.push([i, rawData[i]]);
+                activityInfo.push(
+                    <View style={styles.margin}>
+                        <Text style={styles.itemHeader}>{i}</Text>
+                        <Text>{rawData[i]}</Text>
+                    </View>
+                );
             }
         });
         return activityInfo;
@@ -101,12 +117,9 @@ var activityView = class ActivityView extends Component{
             var activityInfo = this.processActivity();
             return (
                 <View style={styles.pageContent}>
-                    <Table
-                        style={styles.table}
-                        borderStyle={{borderWidth: 1, borderColor: '#e7e4e4'}}
-                        >
-                        <Rows data={activityInfo} textStyle={styles.rowText} />
-                    </Table>
+                    <ScrollView>
+                        {activityInfo}
+                    </ScrollView>
                 </View>
             );
         }
