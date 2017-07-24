@@ -80,7 +80,7 @@ var cameraView = class CameraView extends Component{
                      reactivate={true}
                      reactivateTimeout={1000}
                      topViewStyle={{height: 0, flex: 0}}
-                     bottomViewStyle={{height: 0, flex: 0}}
+                     bottomContent={<Text>Hold camera above a QRCode to scan</Text>}
                      />
                 <View>
                     <Text style={styles.errorMessage}>{this.state.message}</Text>
