@@ -68,6 +68,7 @@ class OrchardApp extends Component{
                         style={{height: 80}}
                         size="large"
                       />
+                    <Text>Loading PLANTIQ</Text>
                 </View>
             );
         } else if(this.state.internet){

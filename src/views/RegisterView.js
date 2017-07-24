@@ -8,6 +8,8 @@ import {
     Picker,
     TextInput,
     Button,
+    StatusBar,
+    ActivityIndicator,
     ScrollView
 } from 'react-native';
 
@@ -147,8 +149,16 @@ var registerView = class RegisterView extends Component {
         if(this.state.species === "" || this.state.variety === ""){
             return(
                 <View style={styles.pageContent}>
-                   <Text>Loading</Text>
-               </View>
+                    <StatusBar
+                        backgroundColor="#43a047"
+                        barStyle="light-content"
+                        />
+                    <ActivityIndicator
+                        animating={true}
+                        style={{height: 80}}
+                        size="large"
+                      />
+                </View>
             );
         } else {
             var speciesItems = this.getPickerItems(this.state.speciesList);
@@ -165,7 +175,7 @@ var registerView = class RegisterView extends Component {
                            selectedValue={this.state.species}
                            onValueChange = {(choice) => {
                             this.setState({species: choice});
-                            this.getVariety();
+                            this.setState({variety: ""});
                             }}>
                             {speciesItems}
                         </Picker>

@@ -11,6 +11,8 @@ import {
     TextInput,
     View,
     Button,
+    StatusBar,
+    ActivityIndicator,
     ScrollView
 } from 'react-native';
 
@@ -151,8 +153,16 @@ var recordView = class RecordView extends Component{
         if(this.state.activity === ""){
             return(
                 <View style={styles.pageContent}>
-                   <Text>Loading</Text>
-               </View>
+                    <StatusBar
+                        backgroundColor="#43a047"
+                        barStyle="light-content"
+                        />
+                    <ActivityIndicator
+                        animating={true}
+                        style={{height: 80}}
+                        size="large"
+                      />
+                </View>
             );
         } else {
             var activityItems = this.getPickerItems(this.state.activityList);

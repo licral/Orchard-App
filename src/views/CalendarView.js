@@ -62,6 +62,9 @@ var calendarView = class CalendarView extends Component {
     }
 
     processActivities(){
+        if(this.state.none){
+            return (<Text style={styles.margin}>No Activities Found</Text>);
+        }
         var rawData = this.state.history;
         var activities = [];
         var today = new Date();
@@ -126,45 +129,19 @@ var calendarView = class CalendarView extends Component {
         const {navigate} = this.props.navigation;
         if(this.state.retrieved === ""){
             return (
-                <ActivityIndicator
-                    animating={true}
-                    style={{height: 80}}
-                    size="large"
-                  />
-            );
-        } else if(this.state.none) {
-            return(
                 <View style={styles.pageContent}>
                     <StatusBar
                         backgroundColor="#43a047"
                         barStyle="light-content"
                         />
-                    <View>
-                        <Text>No Activities Found</Text>
-                    </View>
-                    <ActionButton buttonColor="rgba(255,0,0,1)">
-                        <ActionButton.Item
-                            buttonColor="#ff0000"
-                            title="Record New Activity"
-                            onPress={() => {
-                                this.setState({retrieved: ""});
-                                navigate('Barcode', {action: 'record'});
-                                }}>
-                            <Icon name="create" style={styles.newButton} />
-                        </ActionButton.Item>
-                        <ActionButton.Item
-                            buttonColor="#ff0000"
-                            title="Register New Plant"
-                            onPress={() => {
-                                this.setState({retrieved: ""});
-                                navigate('Barcode', {action: 'register'});
-                                }}>
-                            <Icon name="local-florist" style={styles.newButton} />
-                        </ActionButton.Item>
-                    </ActionButton>
+                    <ActivityIndicator
+                        animating={true}
+                        style={{height: 80}}
+                        size="large"
+                      />
                 </View>
             );
-        } else {
+        }else {
             var activityHistory = this.processActivities();
             return(
                 <View style={styles.pageContent}>
