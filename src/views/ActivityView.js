@@ -48,8 +48,39 @@ var activityView = class ActivityView extends Component{
     processActivity(){
         var rawData = this.state.activityInfo;
         var activityInfo = [];
+        var today = new Date();
+        var weekday = new Array(7);
+        weekday[0] = "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
         Object.keys(rawData).map(function(i){
-            activityInfo.push([i, rawData[i]]);
+            if(i === "Date"){
+                var current = new Date(rawData[i]);
+                if(today.getDate() == current.getDate() && today.getMonth() == current.getMonth() && today.getFullYear() == current.getFullYear()){
+                    date_string = "Today";
+                } else {
+                    date_string = weekday[current.getDay()] + ", " + current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
+                }
+                activityInfo.push([i, date_string]);
+            } else if(i === "Time") {
+                var time = rawData[i].split(":");
+                var hour = time[0];
+                var minute = time[1];
+                var end = "AM";
+                if(hour >= 12){
+                    end = "PM";
+                }
+                if(hour > 12){
+                    hour = hour - 12;
+                }
+                activityInfo.push([i, hour + ':' + minute + ' ' + end]);
+            }else {
+                activityInfo.push([i, rawData[i]]);
+            }
         });
         return activityInfo;
     }

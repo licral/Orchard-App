@@ -38,6 +38,7 @@ var calendarView = class CalendarView extends Component {
             .then((response) => {
                 if(response.ok){
                     response.json().then((responseData) => {
+                        console.log(responseData);
                         this.setState({history: responseData});
                         this.setState({retrieved: "Done"});
                     });
