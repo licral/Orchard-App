@@ -24,7 +24,8 @@ var registerView = class RegisterView extends Component {
             variety: "",
             varietyList: {},
             visualTag: "",
-            notes: ""
+            notes: "",
+            message: ""
         }
     }
 
@@ -138,7 +139,7 @@ var registerView = class RegisterView extends Component {
             }
         },
         (error) => {
-            console.log("No location");
+            this.setState({message: "Please enable location to continue."});
         });
     }
 
@@ -171,6 +172,7 @@ var registerView = class RegisterView extends Component {
                     <ScrollView>
                     <View style={styles.margin}>
                         <Text style={styles.heading}>Plant ID: {state.params.plant_id}</Text>
+                        <Text style={styles.errorMessage}>{this.state.message}</Text>
                     </View>
                     <View style={styles.margin}>
                         <Text style={styles.label}>*Species</Text>
