@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Toast from 'react-native-simple-toast';
 import styles from '../styles/style.js';
 import {
     AsyncStorage,
@@ -10,6 +11,7 @@ import {
     ActivityIndicator,
     ScrollView,
     TouchableNativeFeedback,
+    Button,
     RefreshControl
 } from 'react-native';
 
@@ -23,6 +25,14 @@ var calendarView = class CalendarView extends Component {
             history: [],
             none: false,
             refreshing: false
+        }
+    }
+
+    componentDidMount(){
+        const {state} = this.props.navigation;
+        if(state.params && state.params.message){
+            Toast.show(state.params.message);
+            state.params.message = null;
         }
     }
 
@@ -40,7 +50,6 @@ var calendarView = class CalendarView extends Component {
             .then((response) => {
                 if(response.ok){
                     response.json().then((responseData) => {
-                        console.log(responseData);
                         this.setState({history: responseData});
                         this.setState({retrieved: "Done"});
                     });
