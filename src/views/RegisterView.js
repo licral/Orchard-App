@@ -136,6 +136,9 @@ var registerView = class RegisterView extends Component {
             } catch (error) {
                 console.log("AsyncStorage error: " + error.message);
             }
+        },
+        (error) => {
+            console.log("No location");
         });
     }
 
