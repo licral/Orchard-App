@@ -57,38 +57,40 @@ var activityView = class ActivityView extends Component{
         weekday[4] = "Thursday";
         weekday[5] = "Friday";
         weekday[6] = "Saturday";
+        var current = new Date(rawData["Date"]);
+        if(today.getDate() == current.getDate() && today.getMonth() == current.getMonth() && today.getFullYear() == current.getFullYear()){
+            date_string = "Today";
+        } else {
+            date_string = weekday[current.getDay()] + ", " + current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
+        }
+        var time = rawData["Time"].split(":");
+        var hour = time[0];
+        var minute = time[1];
+        var end = "AM";
+        if(hour >= 12){
+            end = "PM";
+        }
+        if(hour > 12){
+            hour = hour - 12;
+        }
+
+        activityInfo.push(
+            <View style={styles.margin}>
+                <Text style={styles.itemHeader}>Plant (Replace with icon later)</Text>
+                <Text>{rawData["Plant ID"]}</Text>
+                <Text>{rawData["Species"]} - {rawData["Variety"]}</Text>
+            </View>
+        );
+
+        activityInfo.push(
+            <View style={styles.margin}>
+                <Text>{date_string}</Text>
+                <Text>{hour}:{minute} {end}</Text>
+            </View>
+        );
+
         Object.keys(rawData).map(function(i){
-            if(i === "Date"){
-                var current = new Date(rawData[i]);
-                if(today.getDate() == current.getDate() && today.getMonth() == current.getMonth() && today.getFullYear() == current.getFullYear()){
-                    date_string = "Today";
-                } else {
-                    date_string = weekday[current.getDay()] + ", " + current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
-                }
-                activityInfo.push(
-                    <View style={styles.margin}>
-                        <Text style={styles.itemHeader}>{i}</Text>
-                        <Text>{date_string}</Text>
-                    </View>
-                );
-            } else if(i === "Time") {
-                var time = rawData[i].split(":");
-                var hour = time[0];
-                var minute = time[1];
-                var end = "AM";
-                if(hour >= 12){
-                    end = "PM";
-                }
-                if(hour > 12){
-                    hour = hour - 12;
-                }
-                activityInfo.push(
-                    <View style={styles.margin}>
-                        <Text style={styles.itemHeader}>{i}</Text>
-                        <Text>{hour}:{minute} {end}</Text>
-                    </View>
-                );
-            }else {
+            if(i !== "Plant ID" && i !== "Species" && i !== "Variety" && i !== "Date" && i !== "Time") {
                 activityInfo.push(
                     <View style={styles.margin}>
                         <Text style={styles.itemHeader}>{i}</Text>
