@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {NavigationActions} from 'react-navigation';
+import DatePicker from 'react-native-datepicker';
 import styles from '../styles/style.js';
 import {
     AsyncStorage,
@@ -18,6 +19,7 @@ var STORAGE_KEY = 'id-token';
 var registerView = class RegisterView extends Component {
     constructor(){
         super();
+        var d = new Date();
         this.state = {
             species: "",
             speciesList: {},
@@ -25,7 +27,8 @@ var registerView = class RegisterView extends Component {
             varietyList: {},
             visualTag: "",
             notes: "",
-            message: ""
+            message: "",
+            date: d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear()
         }
     }
 
@@ -95,8 +98,8 @@ var registerView = class RegisterView extends Component {
         var visual_tag = this.state.visualTag;
         var variety_id = this.state.variety;
         var notes = this.state.notes;
-        var dateobj = new Date();
-        var date = dateobj.getFullYear() + "-" + (dateobj.getMonth() + 1) + "-" + dateobj.getDate();
+        var dateArray = this.state.date.split("/");
+        var date = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
         navigator.geolocation.getCurrentPosition(async (position) => {
             var longitude = position['coords']['longitude'];
             var latitude = position['coords']['latitude'];
@@ -193,6 +196,18 @@ var registerView = class RegisterView extends Component {
                            >
                             {varietyItems}
                         </Picker>
+                    </View>
+                    <View style={styles.margin}>
+                        <Text style={styles.label}>*Date Planted</Text>
+                        <DatePicker
+                            date={this.state.date}
+                            mode="date"
+                            placeholder={this.state.date}
+                            format="DD/MM/YYYY"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            onDateChange={(date) => {this.setState({date: date})}}
+                          />
                     </View>
                     <View style={styles.margin}>
                         <Text style={styles.label}>Visual Tag</Text>
