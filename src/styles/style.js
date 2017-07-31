@@ -83,6 +83,9 @@ const styles = StyleSheet.create({
     sideHeading: {
         fontSize: 16,
         color: 'white'
+    },
+    drawerIcon: {
+        fontSize: 16
     }
 });
 

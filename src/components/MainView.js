@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {StackNavigator, DrawerNavigator} from 'react-navigation';
 import CustomDrawer from './CustomDrawer.js';
 import DrawerButton from './DrawerButton.js';
@@ -82,17 +83,28 @@ const OuterNavigator = DrawerNavigator({
     Home: {
         screen: activityHistoryStack,
         navigationOptions: () => ({
-            title: "Activity History"
+            title: "Activity History",
+            drawerIcon: ({tintColor}) => (
+                <Icon name="description" style={[styles.drawerIcon, {color: tintColor}]} />
+            )
         })
     },
     AllPlants: {
         screen: allPlantsStack,
         navigationOptions: () => ({
-            title: "View All Plants"
+            title: "View All Plants",
+            drawerIcon: ({tintColor}) => (
+                <Icon name="local-florist" style={[styles.drawerIcon, {color: tintColor}]} />
+            )
         })
     }
 }, {
-    contentComponent: props => <CustomDrawer items={props} />
+    contentComponent: props => <CustomDrawer items={props} />,
+    contentOptions: {
+        activeTintColor: 'white',
+        activeBackgroundColor: '#72bb53',
+        inactiveTintColor: '#43a047'
+    }
 });
 
 const mainView = class MainView extends Component{
