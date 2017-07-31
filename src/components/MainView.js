@@ -8,9 +8,10 @@ import RegisterView from '../views/RegisterView.js';
 import RecordView from '../views/RecordView.js';
 import RegisteredPlantView from '../views/RegisteredPlantView.js';
 import ActivityView from '../views/ActivityView.js';
+import AllPlantsView from '../views/AllPlantsView.js';
 import styles from '../styles/style.js';
 
-const InnerNavigator = StackNavigator({
+const activityHistoryStack = StackNavigator({
     Calendar: {
         screen: CalendarView,
         navigationOptions: ({navigation}) => ({
@@ -49,11 +50,32 @@ const InnerNavigator = StackNavigator({
     })
 });
 
+const allPlantsStack = StackNavigator({
+    ListPlants: {
+        screen: AllPlantsView,
+        navigationOptions: ({navigation}) => ({
+            headerTitle: "View All Plants",
+            headerLeft: <DrawerButton navigation={navigation} />,
+        })
+    }
+}, {
+    navigationOptions: () => ({
+        headerStyle: styles.toolbar,
+        headerTintColor: 'white'
+    })
+});
+
 const OuterNavigator = DrawerNavigator({
     Home: {
-        screen: InnerNavigator,
+        screen: activityHistoryStack,
         navigationOptions: () => ({
             title: "Activity History"
+        })
+    },
+    AllPlants: {
+        screen: allPlantsStack,
+        navigationOptions: () => ({
+            title: "View All Plants"
         })
     }
 }, {
