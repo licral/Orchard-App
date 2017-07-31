@@ -9,6 +9,7 @@ import RecordView from '../views/RecordView.js';
 import RegisteredPlantView from '../views/RegisteredPlantView.js';
 import ActivityView from '../views/ActivityView.js';
 import AllPlantsView from '../views/AllPlantsView.js';
+import PlantInfoView from '../views/PlantInfoView.js';
 import styles from '../styles/style.js';
 
 const activityHistoryStack = StackNavigator({
@@ -56,6 +57,18 @@ const allPlantsStack = StackNavigator({
         navigationOptions: ({navigation}) => ({
             headerTitle: "View All Plants",
             headerLeft: <DrawerButton navigation={navigation} />,
+        })
+    },
+    PlantView: {
+        screen: PlantInfoView,
+        navigationOptions: () => ({
+            headerTitle: "Plant Information",
+        })
+    },
+    Activity: {
+        screen: ActivityView,
+        navigationOptions: () => ({
+            headerTitle: "Activity Details",
         })
     }
 }, {

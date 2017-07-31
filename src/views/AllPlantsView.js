@@ -65,9 +65,9 @@ var calendarView = class CalendarView extends Component {
         }
     }
 
-    _navigateToActivity(id){
+    _navigateToPlant(id){
         const {navigate} = this.props.navigation;
-        navigate('Activity', {activity_id: id});
+        navigate('PlantView', {plant_id: id});
     }
 
     processData(){
@@ -79,10 +79,12 @@ var calendarView = class CalendarView extends Component {
         for(var i = 0; i < rawData.length; i++){
             var plant = rawData[i];
             plants.push(
-                <View style={styles.activityItem}>
-                    <Text style={styles.itemHeader}>Plant ID: {plant["plant_id"]}</Text>
-                    <Text>{plant["species"]} - {plant["variety"]}</Text>
-                </View>
+                <TouchableNativeFeedback onPress={this._navigateToPlant.bind(this, plant["plant_id"])}>
+                    <View style={styles.activityItem}>
+                        <Text style={styles.itemHeader}>Plant ID: {plant["plant_id"]}</Text>
+                        <Text>{plant["species"]} - {plant["variety"]}</Text>
+                    </View>
+                </TouchableNativeFeedback>
             );
         }
         return plants;
