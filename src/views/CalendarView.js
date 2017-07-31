@@ -10,6 +10,7 @@ import {
     StatusBar,
     ActivityIndicator,
     ScrollView,
+    TextInput,
     TouchableNativeFeedback,
     Button,
     RefreshControl
@@ -24,7 +25,8 @@ var calendarView = class CalendarView extends Component {
             retrieved: "",
             history: [],
             none: false,
-            refreshing: false
+            refreshing: false,
+            keyword: ""
         }
     }
 
@@ -70,6 +72,10 @@ var calendarView = class CalendarView extends Component {
         navigate('Activity', {activity_id: id});
     }
 
+    checkSearch(plant_id){
+        return this.state.keyword === "" || plant_id.indexOf(this.state.keyword) >= 0;
+    }
+
     processActivities(){
         if(this.state.none){
             return (<Text style={styles.margin}>No Activities Found</Text>);
@@ -87,48 +93,60 @@ var calendarView = class CalendarView extends Component {
         weekday[6] = "Saturday";
         var current;
         for(var i = 0; i < rawData.length; i++){
+            if(this.state.keyword === "" && i == 10){
+                break;
+            }
             var activity = rawData[i];
-            var date = new Date(activity["date"]);
-            if(current == undefined || date.getDate() != current.getDate() || date.getMonth() != current.getMonth() || date.getFullYear() != current.getFullYear()){
-                current = date;
-                var date_string;
-                if(today.getDate() == current.getDate() && today.getMonth() == current.getMonth() && today.getFullYear() == current.getFullYear()){
-                    date_string = "Today";
-                } else {
-                    date_string = weekday[current.getDay()] + ", " + current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
+            if(this.checkSearch(activity["plant_id"])){
+                var date = new Date(activity["date"]);
+                if(current == undefined || date.getDate() != current.getDate() || date.getMonth() != current.getMonth() || date.getFullYear() != current.getFullYear()){
+                    current = date;
+                    var date_string;
+                    if(today.getDate() == current.getDate() && today.getMonth() == current.getMonth() && today.getFullYear() == current.getFullYear()){
+                        date_string = "Today";
+                    } else {
+                        date_string = weekday[current.getDay()] + ", " + current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
+                    }
+                    activities.push(
+                        <View style={styles.margin}>
+                            <Text style={styles.heading}>{date_string}</Text>
+                        </View>
+                    );
+                }
+                var time = activity["time"].split(":");
+                var hour = time[0];
+                var minute = time[1];
+                var end = "AM";
+                if(hour >= 12){
+                    end = "PM";
+                }
+                if(hour > 12){
+                    hour = hour - 12;
                 }
                 activities.push(
-                    <View style={styles.margin}>
-                        <Text style={styles.heading}>{date_string}</Text>
-                    </View>
+                    <TouchableNativeFeedback onPress={this._navigateToActivity.bind(this, activity["activity_id"])}>
+                        <View style={styles.activityItem}>
+                            <Text style={styles.itemHeader}>{activity["activity_type"]} - {activity["species"]} - {activity["variety"]}</Text>
+                            <Text>Plant ID: {activity["plant_id"]}</Text>
+                            <Text style={styles.itemDateTime}>{hour}:{minute} {end}</Text>
+                        </View>
+                    </TouchableNativeFeedback>
                 );
             }
-            var time = activity["time"].split(":");
-            var hour = time[0];
-            var minute = time[1];
-            var end = "AM";
-            if(hour >= 12){
-                end = "PM";
-            }
-            if(hour > 12){
-                hour = hour - 12;
-            }
-            activities.push(
-                <TouchableNativeFeedback onPress={this._navigateToActivity.bind(this, activity["activity_id"])}>
-                    <View style={styles.activityItem}>
-                        <Text style={styles.itemHeader}>{activity["activity_type"]} - {activity["species"]} - {activity["variety"]}</Text>
-                        <Text>Plant ID: {activity["plant_id"]}</Text>
-                        <Text style={styles.itemDateTime}>{hour}:{minute} {end}</Text>
-                    </View>
-                </TouchableNativeFeedback>
-            );
         }
-        return activities;
+        if(activities.length == 0){
+            return (<Text style={styles.margin}>No Activities Found</Text>);
+        } else {
+            return activities;
+        }
     }
 
     _onRefresh(){
         this.setState({refreshing: true});
-        this.setState({retrieved: ""});
+        this.setState({
+            retrieved: "",
+            keyword: ""
+        });
     }
 
    render() {
@@ -165,6 +183,14 @@ var calendarView = class CalendarView extends Component {
                           onRefresh={this._onRefresh.bind(this)}
                         />}
                       >
+                        <View style={styles.margin}>
+                            <TextInput
+                                underlineColorAndroid="#e7e4e4"
+                                onChangeText={(keyword) => this.setState({keyword})}
+                                value={this.state.keyword}
+                                placeholder={"Search Plant ID..."}
+                                />
+                        </View>
                         {activityHistory}
                     </ScrollView>
                     <ActionButton buttonColor="rgba(255,0,0,1)">
