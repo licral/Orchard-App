@@ -3,6 +3,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {StackNavigator, DrawerNavigator} from 'react-navigation';
 import CustomDrawer from './CustomDrawer.js';
 import DrawerButton from './DrawerButton.js';
+import SearchButton from './SearchButton.js';
+import BackButton from './BackButton.js';
+import SearchBar from './SearchBar.js';
 import CalendarView from '../views/CalendarView.js';
 import BarcodeView from '../views/BarcodeView.js';
 import RegisterView from '../views/RegisterView.js';
@@ -17,8 +20,9 @@ const activityHistoryStack = StackNavigator({
     Calendar: {
         screen: CalendarView,
         navigationOptions: ({navigation}) => ({
-            headerTitle: "Activity History",
-            headerLeft: <DrawerButton navigation={navigation} />,
+            headerTitle: navigation.state.params && navigation.state.params.search ? <SearchBar navigation={navigation} /> : "Activity History",
+            headerLeft: navigation.state.params && navigation.state.params.search ? <BackButton navigation={navigation} /> : <DrawerButton navigation={navigation} />,
+            headerRight: navigation.state.params && navigation.state.params.search ? null : <SearchButton navigation={navigation} />
         })
     },
     Barcode: {

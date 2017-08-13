@@ -17,6 +17,11 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginLeft: 16
     },
+    headerRightIcon:{
+        color: 'white',
+        fontSize: 24,
+        marginRight: 16
+    },
     newButton: {
         fontSize: 20,
         color: 'white'
@@ -86,6 +91,11 @@ const styles = StyleSheet.create({
     },
     drawerIcon: {
         fontSize: 16
+    },
+    optionsButton: {
+        fontSize: 30,
+        marginTop: 5,
+        marginLeft: 2
     }
 });
 

@@ -73,7 +73,12 @@ var calendarView = class CalendarView extends Component {
     }
 
     checkSearch(plant_id){
-        return this.state.keyword === "" || plant_id.indexOf(this.state.keyword) >= 0;
+        const {state} = this.props.navigation;
+        var keyword = "";
+        if(state.params && state.params.keyword){
+            keyword = state.params.keyword;
+        }
+        return keyword === "" || plant_id.indexOf(keyword) >= 0;
     }
 
     processActivities(){
@@ -92,8 +97,13 @@ var calendarView = class CalendarView extends Component {
         weekday[5] = "Friday";
         weekday[6] = "Saturday";
         var current;
+        const {state} = this.props.navigation;
+        var keyword = "";
+        if(state.params && state.params.keyword){
+            keyword = state.params.keyword;
+        }
         for(var i = 0; i < rawData.length; i++){
-            if(this.state.keyword === "" && i == 10){
+            if(keyword === "" && i == 10){
                 break;
             }
             var activity = rawData[i];
@@ -149,7 +159,11 @@ var calendarView = class CalendarView extends Component {
         });
     }
 
-   render() {
+    showOptions(){
+        console.log("options");
+    }
+
+    render() {
         if(this.state.retrieved === ""){
             this.getActivityHistory();
         }
@@ -165,7 +179,7 @@ var calendarView = class CalendarView extends Component {
                         animating={true}
                         style={{height: 80}}
                         size="large"
-                      />
+                        />
                 </View>
             );
         }else {
@@ -177,46 +191,38 @@ var calendarView = class CalendarView extends Component {
                         barStyle="light-content"
                         />
                     <ScrollView
-                      refreshControl={
-                        <RefreshControl
-                          refreshing={this.state.refreshing}
-                          onRefresh={this._onRefresh.bind(this)}
-                        />}
-                      >
-                        <View style={styles.margin}>
-                            <TextInput
-                                underlineColorAndroid="#e7e4e4"
-                                onChangeText={(keyword) => this.setState({keyword})}
-                                value={this.state.keyword}
-                                placeholder={"Search Plant ID..."}
-                                />
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.refreshing}
+                                onRefresh={this._onRefresh.bind(this)}
+                                />}
+                                >
+                                {activityHistory}
+                            </ScrollView>
+                            <ActionButton buttonColor="rgba(255,0,0,1)">
+                                <ActionButton.Item
+                                    buttonColor="#ff0000"
+                                    title="Record New Activity"
+                                    onPress={() => {
+                                        this.setState({retrieved: ""});
+                                        navigate('Barcode', {action: 'record'});
+                                    }}>
+                                    <Icon name="create" style={styles.newButton} />
+                                </ActionButton.Item>
+                                <ActionButton.Item
+                                    buttonColor="#ff0000"
+                                    title="Register New Plant"
+                                    onPress={() => {
+                                        this.setState({retrieved: ""});
+                                        navigate('Barcode', {action: 'register'});
+                                    }}>
+                                    <Icon name="local-florist" style={styles.newButton} />
+                                </ActionButton.Item>
+                            </ActionButton>
                         </View>
-                        {activityHistory}
-                    </ScrollView>
-                    <ActionButton buttonColor="rgba(255,0,0,1)">
-                        <ActionButton.Item
-                            buttonColor="#ff0000"
-                            title="Record New Activity"
-                            onPress={() => {
-                                this.setState({retrieved: ""});
-                                navigate('Barcode', {action: 'record'});
-                                }}>
-                            <Icon name="create" style={styles.newButton} />
-                        </ActionButton.Item>
-                        <ActionButton.Item
-                            buttonColor="#ff0000"
-                            title="Register New Plant"
-                            onPress={() => {
-                                this.setState({retrieved: ""});
-                                navigate('Barcode', {action: 'register'});
-                                }}>
-                            <Icon name="local-florist" style={styles.newButton} />
-                        </ActionButton.Item>
-                    </ActionButton>
-                </View>
-            );
+                    );
+                }
+            }
         }
-   }
-}
 
-export default calendarView;
+        export default calendarView;

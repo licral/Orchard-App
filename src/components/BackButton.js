@@ -3,11 +3,11 @@ import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/style.js';
 
-const DrawerButton = ({ navigation }) => (
+const SearchButton = ({ navigation }) => (
     <TouchableOpacity
-        onPress={() => navigation.navigate('DrawerOpen')}>
-        <Icon name="menu" style={styles.headerLeftIcon} />
+        onPress={() => navigation.setParams({search: false, keyword: ""})}>
+        <Icon name="arrow-back" style={styles.headerLeftIcon} />
     </TouchableOpacity>
 );
 
-export default DrawerButton;
+export default SearchButton;
