@@ -12,6 +12,7 @@
     "react-native-action-button": "*",
     "react-native-camera": "*",
     "react-native-datepicker": "^1.6.0",
+    "react-native-popup-menu": "^0.8.0",
     "react-native-qrcode-scanner": "0.0.9",
     "react-native-simple-toast": "0.0.6",
     "react-native-vector-icons": "^4.1.1",

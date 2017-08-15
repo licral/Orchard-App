@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {StackNavigator, DrawerNavigator} from 'react-navigation';
+import {
+    StackNavigator,
+    DrawerNavigator
+} from 'react-navigation';
+import {
+    MenuContext
+} from 'react-native-popup-menu';
 import CustomDrawer from './CustomDrawer.js';
 import DrawerButton from './DrawerButton.js';
 import SearchButton from './SearchButton.js';
+import OptionsButton from './OptionsButton.js';
 import BackButton from './BackButton.js';
 import SearchBar from './SearchBar.js';
 import CalendarView from '../views/CalendarView.js';
+import FilterView from '../views/FilterView.js';
 import BarcodeView from '../views/BarcodeView.js';
 import RegisterView from '../views/RegisterView.js';
 import RecordView from '../views/RecordView.js';
@@ -22,7 +30,7 @@ const activityHistoryStack = StackNavigator({
         navigationOptions: ({navigation}) => ({
             headerTitle: navigation.state.params && navigation.state.params.search ? <SearchBar navigation={navigation} /> : "Activity History",
             headerLeft: navigation.state.params && navigation.state.params.search ? <BackButton navigation={navigation} /> : <DrawerButton navigation={navigation} />,
-            headerRight: navigation.state.params && navigation.state.params.search ? null : <SearchButton navigation={navigation} />
+            headerRight: navigation.state.params && navigation.state.params.search ? <OptionsButton navigation={navigation} /> : <SearchButton navigation={navigation} />
         })
     },
     Barcode: {
@@ -47,6 +55,12 @@ const activityHistoryStack = StackNavigator({
         screen: ActivityView,
         navigationOptions: () => ({
             headerTitle: "Activity Details"
+        })
+    },
+    Filter: {
+        screen: FilterView,
+        navigationOptions: () => ({
+            headerTitle: "Filter Results"
         })
     }
 }, {
@@ -114,7 +128,9 @@ const OuterNavigator = DrawerNavigator({
 const mainView = class MainView extends Component{
     render(){
         return (
-            <OuterNavigator />
+            <MenuContext>
+                <OuterNavigator />
+            </MenuContext>
         );
     }
 }
