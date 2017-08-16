@@ -110,10 +110,7 @@ var activityListView = class ActivityListView extends Component {
         weekday[6] = "Saturday";
         var current;
         const {state} = this.props.navigation;
-        var search = false;
-        if(state.params && state.params.search){
-            search = state.params.search;
-        }
+        var search = state.params && state.params.search ? state.params.search : false;
         for(var i = 0; i < rawData.length; i++){
             if(search == false && i == 10){
                 break;

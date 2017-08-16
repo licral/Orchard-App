@@ -103,12 +103,15 @@ class OptionsButton extends Component{
     }
 
     getFilter(){
+        const navigate = this.props.navigation;
+        var activityFilters = navigate.state.params && navigate.state.params.activityFilters ? navigate.state.params.activityFilters : [];
         if(this.state.menuOpen == 1){
             return Sort;
         } else if(this.state.menuOpen == 2){
             return <FilterView list={this.state.activityFilterList}
                 done={this.filterActivityCallback.bind(this)}
-                cancel={this.cancelCallback.bind(this)}/>;
+                cancel={this.cancelCallback.bind(this)}
+                highlighted={activityFilters} />;
         } else if(this.state.menuOpen == 3){
             return PlantFilter;
         } else if(this.state.menuOpen == 4){

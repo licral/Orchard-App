@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 
 var FilterView = class FilterView extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            highlighted : []
+            highlighted : props.highlighted
         }
     }
 
