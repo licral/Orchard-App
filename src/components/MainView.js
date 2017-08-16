@@ -14,7 +14,6 @@ import OptionsButton from './OptionsButton.js';
 import BackButton from './BackButton.js';
 import SearchBar from './SearchBar.js';
 import CalendarView from '../views/CalendarView.js';
-import FilterView from '../views/FilterView.js';
 import BarcodeView from '../views/BarcodeView.js';
 import RegisterView from '../views/RegisterView.js';
 import RecordView from '../views/RecordView.js';
@@ -55,12 +54,6 @@ const activityHistoryStack = StackNavigator({
         screen: ActivityView,
         navigationOptions: () => ({
             headerTitle: "Activity Details"
-        })
-    },
-    Filter: {
-        screen: FilterView,
-        navigationOptions: () => ({
-            headerTitle: "Filter Results"
         })
     }
 }, {
