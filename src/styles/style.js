@@ -96,6 +96,10 @@ const styles = StyleSheet.create({
         fontSize: 30,
         marginTop: 5,
         marginLeft: 2
+    },
+    modalIcon:{
+        fontSize: 35,
+        padding: 10
     }
 });
 

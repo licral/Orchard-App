@@ -5,8 +5,7 @@ import {
     MenuOptions,
     MenuOption,
     MenuContext,
-    MenuTrigger,
-    renderers
+    MenuTrigger
 } from 'react-native-popup-menu';
 import Modal from 'react-native-modal';
 import styles from '../styles/style.js';
@@ -16,39 +15,99 @@ import {
     Text
 } from 'react-native';
 
-const {SlideInMenu} = renderers;
+const Sort = (
+    <View style={{backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{flexDirection: 'row'}}>
+            <Icon name="close" style={[styles.modalIcon, {color: '#fe4a49'}]} />
+            <View style={{flex: 1}}></View>
+            <Icon name="done" style={[styles.modalIcon, {color: '#43a047'}]} />
+        </View>
+        <View style={{padding: 22}}>
+            <Text>Sort by...</Text>
+        </View>
+    </View>
+);
+
+const ActivityFilter = (
+    <View style={{backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{flexDirection: 'row'}}>
+            <Icon name="close" style={[styles.modalIcon, {color: '#fe4a49'}]} />
+            <View style={{flex: 1}}></View>
+            <Icon name="done" style={[styles.modalIcon, {color: '#43a047'}]} />
+        </View>
+        <View style={{padding: 22}}>
+            <Text>Filter by activity type</Text>
+        </View>
+    </View>
+);
+
+const PlantFilter = (
+    <View style={{backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{flexDirection: 'row'}}>
+            <Icon name="close" style={[styles.modalIcon, {color: '#fe4a49'}]} />
+            <View style={{flex: 1}}></View>
+            <Icon name="done" style={[styles.modalIcon, {color: '#43a047'}]} />
+        </View>
+        <View style={{padding: 22}}>
+            <Text>Filter by plant type</Text>
+        </View>
+    </View>
+);
+
+const DateFilter = (
+    <View style={{backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{flexDirection: 'row'}}>
+            <Icon name="close" style={[styles.modalIcon, {color: '#fe4a49'}]} />
+            <View style={{flex: 1}}></View>
+            <Icon name="done" style={[styles.modalIcon, {color: '#43a047'}]} />
+        </View>
+        <View style={{padding: 22}}>
+            <Text>Filter by date</Text>
+        </View>
+    </View>
+);
 
 class OptionsButton extends Component{
     constructor(){
         super();
         this.state = {
-            menuOpen: false
+            menuOpen: 0
         };
     }
 
-    openMenu(value){
-        if(value == 1) {
-            this.setState({menuOpen: true});
+    getFilter(){
+        if(this.state.menuOpen == 1){
+            return Sort;
+        } else if(this.state.menuOpen == 2){
+            return ActivityFilter;
+        } else if(this.state.menuOpen == 3){
+            return PlantFilter;
+        } else if(this.state.menuOpen == 4){
+            return DateFilter;
+        } else {
+            return <View></View>;
         }
     }
 
     render(){
+        var filter = this.getFilter();
         return(
             <View>
-                <Menu name="filterMenu" onSelect={value => this.openMenu(value)}>
+                <Menu name="filterMenu" onSelect={value => this.setState({menuOpen: value})}>
                     <MenuTrigger>
                         <Icon name="more-vert" style={styles.headerRightIcon} />
                     </MenuTrigger>
                     <MenuOptions>
-                        <MenuOption value={1} text='Test1' />
+                        <MenuOption value={1} text='Sort by...' />
+                        <MenuOption value={2} text='Filter by Activity Type' />
+                        <MenuOption value={3} text='Filter by Plant Type' />
+                        <MenuOption value={4} text='Filter by Date' />
                     </MenuOptions>
                 </Menu>
-                <TouchableWithoutFeedback onPress={() => {this.setState({menuOpen: false})}}>
-                    <Modal isVisible={this.state.menuOpen} style={{justifyContent: 'flex-end', margin: 0}}>
+                <TouchableWithoutFeedback onPress={() => {this.setState({menuOpen: 0})}}>
+                    <Modal isVisible={this.state.menuOpen > 0} style={{justifyContent: 'flex-end', margin: 0}}>
                         <TouchableWithoutFeedback onPress={() => {}}>
-                            <View style={{backgroundColor: 'white', padding: 22, justifyContent: 'center', alignItems: 'center'}}>
-                                <Text>This is a modal!</Text>
-                            </View>
+                            {filter}
                         </TouchableWithoutFeedback>
                     </Modal>
                 </TouchableWithoutFeedback>
