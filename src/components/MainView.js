@@ -13,7 +13,7 @@ import SearchButton from './SearchButton.js';
 import OptionsButton from './OptionsButton.js';
 import BackButton from './BackButton.js';
 import SearchBar from './SearchBar.js';
-import CalendarView from '../views/CalendarView.js';
+import ActivityListView from '../views/ActivityListView.js';
 import BarcodeView from '../views/BarcodeView.js';
 import RegisterView from '../views/RegisterView.js';
 import RecordView from '../views/RecordView.js';
@@ -25,7 +25,7 @@ import styles from '../styles/style.js';
 
 const activityHistoryStack = StackNavigator({
     Calendar: {
-        screen: CalendarView,
+        screen: ActivityListView,
         navigationOptions: ({navigation}) => ({
             headerTitle: navigation.state.params && navigation.state.params.search ? <SearchBar navigation={navigation} /> : "Activity History",
             headerLeft: navigation.state.params && navigation.state.params.search ? <BackButton navigation={navigation} /> : <DrawerButton navigation={navigation} />,

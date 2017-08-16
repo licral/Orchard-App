@@ -18,15 +18,14 @@ import {
 
 var STORAGE_KEY = 'id-token';
 
-var calendarView = class CalendarView extends Component {
+var activityListView = class ActivityListView extends Component {
     constructor(){
         super();
         this.state = {
             retrieved: "",
             history: [],
             none: false,
-            refreshing: false,
-            keyword: ""
+            refreshing: false
         }
     }
 
@@ -81,6 +80,19 @@ var calendarView = class CalendarView extends Component {
         return keyword === "" || plant_id.indexOf(keyword) >= 0;
     }
 
+    checkActivity(activity){
+        const {state} = this.props.navigation;
+        var filters = [];
+        if(state.params && state.params.activityFilters){
+            filters = state.params.activityFilters;
+        }
+        if(filters.length == 0 || filters.indexOf(activity) > -1){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     processActivities(){
         if(this.state.none){
             return (<Text style={styles.margin}>No Activities Found</Text>);
@@ -98,16 +110,16 @@ var calendarView = class CalendarView extends Component {
         weekday[6] = "Saturday";
         var current;
         const {state} = this.props.navigation;
-        var keyword = "";
-        if(state.params && state.params.keyword){
-            keyword = state.params.keyword;
+        var search = false;
+        if(state.params && state.params.search){
+            search = state.params.search;
         }
         for(var i = 0; i < rawData.length; i++){
-            if(keyword === "" && i == 10){
+            if(search == false && i == 10){
                 break;
             }
             var activity = rawData[i];
-            if(this.checkSearch(activity["plant_id"])){
+            if(this.checkSearch(activity["plant_id"]) && this.checkActivity(activity["activity_type"])){
                 var date = new Date(activity["date"]);
                 if(current == undefined || date.getDate() != current.getDate() || date.getMonth() != current.getMonth() || date.getFullYear() != current.getFullYear()){
                     current = date;
@@ -152,15 +164,12 @@ var calendarView = class CalendarView extends Component {
     }
 
     _onRefresh(){
-        this.setState({refreshing: true});
         this.setState({
-            retrieved: "",
-            keyword: ""
+            refreshing: true,
+            retrieved: ""
         });
-    }
-
-    showOptions(){
-        console.log("options");
+        const {setParams} = this.props.navigation;
+        setParams({keyword: ""});
     }
 
     render() {
@@ -225,4 +234,4 @@ var calendarView = class CalendarView extends Component {
             }
         }
 
-        export default calendarView;
+export default activityListView;

@@ -93,9 +93,8 @@ class OptionsButton extends Component{
         }
     }
 
-    filterActivityCallback(activities){
-        console.log("Got here");
-        console.log(activities);
+    filterActivityCallback(filterList){
+        this.props.navigation.setParams({activityFilters: filterList});
         this.setState({menuOpen: 0});
     }
 
