@@ -64,9 +64,11 @@ class OptionsButton extends Component{
         super();
         this.state = {
             menuOpen: 0,
-            activityFilterList: {}
+            activityFilterList: {},
+            speciesFilterList: {}
         };
         this.getActivityTypes();
+        this.getSpecies();
     }
 
     async getActivityTypes(){
@@ -93,8 +95,37 @@ class OptionsButton extends Component{
         }
     }
 
+    async getSpecies(){
+        try{
+            var TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
+            fetch('https://orchard-app-java-tomcat.herokuapp.com/get/species', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': TOKEN
+                }
+            })
+            .then((response) => {
+                if(response.ok){
+                    response.json().then((responseData) => {
+                        this.setState({speciesFilterList: responseData});
+                    });
+                }
+            })
+            .done();
+        } catch (error) {
+            console.log("AsyncStorage error: " + error.message);
+        }
+    }
+
     filterActivityCallback(filterList){
         this.props.navigation.setParams({activityFilters: filterList.slice()});
+        this.setState({menuOpen: 0});
+    }
+
+    filterSpeciesCallback(filterList){
+        this.props.navigation.setParams({speciesFilters: filterList.slice()});
         this.setState({menuOpen: 0});
     }
 
@@ -105,7 +136,7 @@ class OptionsButton extends Component{
     getFilter(){
         const navigate = this.props.navigation;
         var activityFilters = navigate.state.params && navigate.state.params.activityFilters ? navigate.state.params.activityFilters : [];
-        console.log(navigate.state.params);
+        var speciesFilters = navigate.state.params && navigate.state.params.speciesFilters ? navigate.state.params.speciesFilters : [];
         if(this.state.menuOpen == 1){
             return Sort;
         } else if(this.state.menuOpen == 2){
@@ -114,8 +145,13 @@ class OptionsButton extends Component{
                 cancel={this.cancelCallback.bind(this)}
                 highlighted={activityFilters} />;
         } else if(this.state.menuOpen == 3){
-            return PlantFilter;
+            return <FilterView list={this.state.speciesFilterList}
+                done={this.filterSpeciesCallback.bind(this)}
+                cancel={this.cancelCallback.bind(this)}
+                highlighted={speciesFilters} />;
         } else if(this.state.menuOpen == 4){
+            return DateFilter;
+        } else if(this.state.menuOpen == 5){
             return DateFilter;
         } else {
             return <View></View>;
@@ -133,8 +169,9 @@ class OptionsButton extends Component{
                     <MenuOptions customStyles={{optionWrapper: {padding: 10}}}>
                         <MenuOption value={1} text='Sort by...' />
                         <MenuOption value={2} text='Filter by Activity Type' />
-                        <MenuOption value={3} text='Filter by Plant Type' />
-                        <MenuOption value={4} text='Filter by Date' />
+                        <MenuOption value={3} text='Filter by Plant Species' />
+                        <MenuOption value={4} text='Filter by Plant Variety' />
+                        <MenuOption value={5} text='Filter by Date' />
                     </MenuOptions>
                 </Menu>
                 <TouchableWithoutFeedback onPress={() => {this.setState({menuOpen: 0})}}>

@@ -5,7 +5,12 @@ import styles from '../styles/style.js';
 
 const SearchButton = ({ navigation }) => (
     <TouchableOpacity
-        onPress={() => navigation.setParams({search: false, keyword: "", activityFilters: []})}>
+        onPress={() => navigation.setParams({
+            search: false,
+            keyword: "",
+            activityFilters: [],
+            speciesFilters: []
+        })}>
         <Icon name="arrow-back" style={styles.headerLeftIcon} />
     </TouchableOpacity>
 );
