@@ -94,7 +94,7 @@ class OptionsButton extends Component{
     }
 
     filterActivityCallback(filterList){
-        this.props.navigation.setParams({activityFilters: filterList});
+        this.props.navigation.setParams({activityFilters: filterList.slice()});
         this.setState({menuOpen: 0});
     }
 
@@ -105,6 +105,7 @@ class OptionsButton extends Component{
     getFilter(){
         const navigate = this.props.navigation;
         var activityFilters = navigate.state.params && navigate.state.params.activityFilters ? navigate.state.params.activityFilters : [];
+        console.log(navigate.state.params);
         if(this.state.menuOpen == 1){
             return Sort;
         } else if(this.state.menuOpen == 2){

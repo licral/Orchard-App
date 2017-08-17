@@ -13,7 +13,7 @@ var FilterView = class FilterView extends Component{
     constructor(props){
         super(props);
         this.state = {
-            highlighted : props.highlighted
+            highlighted : props.highlighted.slice()
         }
     }
 
@@ -25,7 +25,7 @@ var FilterView = class FilterView extends Component{
         } else {
             list.splice(index, 1);
         }
-        this.setState({highlighted: list});
+        this.setState({highlighted: list.slice()});
     }
 
     processList(){
@@ -47,13 +47,17 @@ var FilterView = class FilterView extends Component{
         return pickers;
     }
 
+    cancel(){
+        this.props.cancel();
+    }
+
     render(){
         var filterList = this.processList();
         return(
             <TouchableWithoutFeedback onPress={() => {}}>
                 <View style={{backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
                     <View style={{flexDirection: 'row'}}>
-                        <TouchableNativeFeedback onPress={() => this.props.cancel()}>
+                        <TouchableNativeFeedback onPress={() => this.cancel()}>
                         <View>
                             <Icon name="close" style={[styles.modalIcon, {color: '#fe4a49'}]} />
                         </View>

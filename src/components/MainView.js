@@ -19,6 +19,7 @@ import RegisterView from '../views/RegisterView.js';
 import RecordView from '../views/RecordView.js';
 import RegisteredPlantView from '../views/RegisteredPlantView.js';
 import ActivityView from '../views/ActivityView.js';
+import MapView from '../views/MapView.js';
 import AllPlantsView from '../views/AllPlantsView.js';
 import PlantInfoView from '../views/PlantInfoView.js';
 import styles from '../styles/style.js';
@@ -90,6 +91,33 @@ const allPlantsStack = StackNavigator({
     })
 });
 
+const mapStack = StackNavigator({
+    MapPlants: {
+        screen: MapView,
+        navigationOptions: ({navigation}) => ({
+            headerTitle: "Map of Plants",
+            headerLeft: <DrawerButton navigation={navigation} />,
+        })
+    },
+    PlantView: {
+        screen: PlantInfoView,
+        navigationOptions: () => ({
+            headerTitle: "Plant Information",
+        })
+    },
+    Activity: {
+        screen: ActivityView,
+        navigationOptions: () => ({
+            headerTitle: "Activity Details",
+        })
+    }
+}, {
+    navigationOptions: () => ({
+        headerStyle: styles.toolbar,
+        headerTintColor: 'white'
+    })
+});
+
 const OuterNavigator = DrawerNavigator({
     Home: {
         screen: activityHistoryStack,
@@ -106,6 +134,15 @@ const OuterNavigator = DrawerNavigator({
             title: "View All Plants",
             drawerIcon: ({tintColor}) => (
                 <Icon name="local-florist" style={[styles.drawerIcon, {color: tintColor}]} />
+            )
+        })
+    },
+    MapPlants: {
+        screen: mapStack,
+        navigationOptions: () => ({
+            title: "Map of All Plants",
+            drawerIcon: ({tintColor}) => (
+                <Icon name="location-on" style={[styles.drawerIcon, {color: tintColor}]} />
             )
         })
     }
