@@ -165,8 +165,6 @@ var activityListView = class ActivityListView extends Component {
             refreshing: true,
             retrieved: ""
         });
-        const {setParams} = this.props.navigation;
-        setParams({keyword: ""});
     }
 
     render() {

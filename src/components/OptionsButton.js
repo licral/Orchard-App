@@ -129,7 +129,7 @@ class OptionsButton extends Component{
                     <MenuTrigger>
                         <Icon name="more-vert" style={styles.headerRightIcon} />
                     </MenuTrigger>
-                    <MenuOptions>
+                    <MenuOptions customStyles={{optionWrapper: {padding: 10}}}>
                         <MenuOption value={1} text='Sort by...' />
                         <MenuOption value={2} text='Filter by Activity Type' />
                         <MenuOption value={3} text='Filter by Plant Type' />
