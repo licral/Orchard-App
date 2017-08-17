@@ -8,25 +8,27 @@ import {
     StatusBar,
     StyleSheet
 } from 'react-native';
+import MapView from 'react-native-maps';
 
 var STORAGE_KEY = 'id-token';
 
-var mapView = class MapView extends Component{
-    constructor(){
-        super();
-        this.state = {
-            retrieved: "",
-            activityInfo: {}
-        }
-    }
+var mapViewComponent = class MapViewComponent extends Component{
 
     render () {
         return (
             <View style={{...StyleSheet.absoluteFillObject, justifyContent: 'flex-end', alignItems: 'center'}}>
-                <Text>Hello there</Text>
+                <MapView
+                  style={{...StyleSheet.absoluteFillObject}}
+                  initialRegion={{
+                    latitude: 37.78825,
+                    longitude: -122.4324,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                  }}
+                />
             </View>
         );
     }
 }
 
-export default mapView;
+export default mapViewComponent;
