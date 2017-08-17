@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/style.js';
 import {
     AsyncStorage,
@@ -20,7 +21,8 @@ var mapViewComponent = class MapViewComponent extends Component{
             plants: [],
             none: false,
             refreshing: false,
-            markers: []
+            markers: [],
+            markerImage: null
         }
     }
 
@@ -55,6 +57,7 @@ var mapViewComponent = class MapViewComponent extends Component{
     }
 
     processCoordinates(){
+        Icon.getImageSource('local-florist', 30, '#fe4a49').then((source) => this.setState({markerImage: source}));
         var m = [];
         this.state.plants.map( p => {
             m.push({
@@ -100,7 +103,9 @@ var mapViewComponent = class MapViewComponent extends Component{
                       style={{...StyleSheet.absoluteFillObject}}
                       onMapReady = {() => this.fitAllMarkers()}>
                         {plants.map( p => (
-                            <MapView.Marker coordinate={{
+                            <MapView.Marker
+                                image = {this.state.markerImage}
+                                coordinate={{
                                     latitude: Number(p.latitude),
                                     longitude: Number(p.longitude)
                                 }} />
