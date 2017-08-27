@@ -106,6 +106,19 @@ var activityListView = class ActivityListView extends Component {
         }
     }
 
+    checkVariety(variety){
+        const {state} = this.props.navigation;
+        var filters = [];
+        if(state.params && state.params.varietyFilters){
+            filters = state.params.varietyFilters;
+        }
+        if(filters.length == 0 || filters.indexOf(variety) > -1){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     processActivities(){
         if(this.state.none){
             return (<Text style={styles.margin}>No Activities Found</Text>);
@@ -129,7 +142,7 @@ var activityListView = class ActivityListView extends Component {
                 break;
             }
             var activity = rawData[i];
-            if(this.checkSearch(activity["plant_id"]) && this.checkActivity(activity["activity_type"]) && this.checkSpecies(activity["species"])){
+            if(this.checkSearch(activity["plant_id"]) && this.checkActivity(activity["activity_type"]) && this.checkSpecies(activity["species"]) && this.checkVariety(activity["variety"])){
                 var date = new Date(activity["date"]);
                 if(current == undefined || date.getDate() != current.getDate() || date.getMonth() != current.getMonth() || date.getFullYear() != current.getFullYear()){
                     current = date;
