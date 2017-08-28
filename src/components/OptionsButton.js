@@ -156,15 +156,12 @@ class OptionsButton extends Component{
         });
         this.setState({varietyFilterList: newVarietyList.slice()});
         var oldFilterList = this.props.navigation.state.params && this.props.navigation.state.params.varietyFilters ? this.props.navigation.state.params.varietyFilters : [];
-        // console.log(this.props.navigation.state.params.speciesFilters);
         var newFilterList = [];
         oldFilterList.map(item => {
             if(newVarietyList.indexOf(item) > 0){
                 newFilterList.push(item);
             }
         });
-        // this.props.navigation.setParams({varietyFilters: newFilterList.slice()});
-        // console.log(newFilterList);
         return newFilterList;
     }
 

@@ -77,7 +77,26 @@ var loginView = class LoginView extends Component{
                   />
             );
         } else {
-            return null;
+            return (
+                [<TextInput
+                    underlineColorAndroid="#e7e4e4"
+                    onChangeText={(username) => this.setState({username})}
+                    value={this.state.username}
+                    placeholder={"Username"}
+                    />,
+                <TextInput
+                    underlineColorAndroid="#e7e4e4"
+                    secureTextEntry={true}
+                    onChangeText={(password) => this.setState({password})}
+                    value={this.state.password}
+                    placeholder={"Password"}
+                    />,
+                <Button
+                   onPress={this._userLogin.bind(this)}
+                   title="Login"
+                   color="#43a047"
+                   />]
+            );
         }
     }
 
@@ -94,35 +113,15 @@ var loginView = class LoginView extends Component{
     render () {
         var errorMessage = this.getErrorMessage();
         return (
-            <Image style={{flex: 1, width: null, height: null}} source={require('../img/splashback.jpg')}>
-                <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'rgba(255,255,255,0.5)', alignItems: 'center', justifyContent: 'center'}}>
-                    <View style={styles.loginPanel}>
-                        <View style={styles.logo}>
-                            <Image source={require('../img/logo.png')} />
-                        </View>
-                        {errorMessage}
-                        <TextInput
-                            underlineColorAndroid="#e7e4e4"
-                            onChangeText={(username) => this.setState({username})}
-                            value={this.state.username}
-                            placeholder={"Username"}
-                            />
-                        <TextInput
-                            underlineColorAndroid="#e7e4e4"
-                            secureTextEntry={true}
-                            onChangeText={(password) => this.setState({password})}
-                            value={this.state.password}
-                            placeholder={"Password"}
-                            />
-                        <Button
-                           onPress={this._userLogin.bind(this)}
-                           title="Login"
-                           color="#43a047"
-                           />
-                        {this._isLoading()}
-                    </View>
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#43a047'}}>
+                <View style={{width: '80%', height: 100, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center'}}>
+                    <Image resizeMode="contain" style={{width:'90%', height: '100%', backgroundColor: 'white'}} source={require('../img/logo_v1_large.png')} />
                 </View>
-            </Image>
+                <View style={{width: '80%', backgroundColor: 'white', padding: 10}}>
+                    {errorMessage}
+                    {this._isLoading()}
+                </View>
+            </View>
         );
     }
 }
