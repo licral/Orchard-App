@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/style.js';
 import {
     AsyncStorage,
@@ -74,31 +75,49 @@ var activityView = class ActivityView extends Component{
             hour = hour - 12;
         }
 
-        activityInfo.push(
-            <View style={styles.margin}>
-                <Text style={styles.itemHeader}>Plant (Replace with icon later)</Text>
-                <Text>{rawData["Plant ID"]}</Text>
-                <Text>{rawData["Species"]} - {rawData["Variety"]}</Text>
-            </View>
-        );
+        var activityDetails = null;
+
+        if(rawData["Activity Type"] === "Fertiliser" || rawData["Activity Type"] === "Chemical Sprayed"){
+            activityDetails = [
+                <Text>Product: {rawData["Product"]}</Text>,
+                <Text>Rate: {rawData["Rate"]}</Text>
+            ];
+        } else if(rawData["Activity Type"] === "Harvest"){
+            activityDetails = (
+                <Text>Weight: {rawData["Weight"]}kg</Text>
+            );
+        }
 
         activityInfo.push(
             <View style={styles.margin}>
-                <Text>{date_string}</Text>
-                <Text>{hour}:{minute} {end}</Text>
-            </View>
-        );
-
-        Object.keys(rawData).map(function(i){
-            if(i !== "Plant ID" && i !== "Species" && i !== "Variety" && i !== "Date" && i !== "Time") {
-                activityInfo.push(
-                    <View style={styles.margin}>
-                        <Text style={styles.itemHeader}>{i}</Text>
-                        <Text>{rawData[i]}</Text>
+                <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+                    <Icon name="qrcode" style={{fontSize: 25, color: '#fe4a49', marginRight: 20}} />
+                    <Text style={{flex: 1, fontSize: 18, color: 'black'}}>{rawData["Plant ID"]}</Text>
+                </View>
+                <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+                    <Icon name="leaf" style={{fontSize: 25, color: '#fe4a49', marginRight: 20}} />
+                    <Text style={{flex: 1, fontSize: 18, color: 'black'}}>{rawData["Species"]} - {rawData["Variety"]}</Text>
+                </View>
+                <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+                    <Icon name="calendar-clock" style={{fontSize: 25, color: '#fe4a49', marginRight: 20}} />
+                    <View>
+                        <Text style={{fontSize: 18, color: 'black'}}>{date_string}</Text>
+                        <Text style={{fontSize: 18, color: 'black'}}>{hour}:{minute} {end}</Text>
                     </View>
-                );
-            }
-        });
+                </View>
+                <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+                    <Icon name="book" style={{fontSize: 25, color: '#fe4a49', marginRight: 20}} />
+                    <View>
+                        <Text style={{flex: 1, fontSize: 18, color: 'black'}}>{rawData["Activity Type"]}</Text>
+                        {activityDetails}
+                    </View>
+                </View>
+                <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+                    <Icon name="lead-pencil" style={{fontSize: 25, color: '#fe4a49', marginRight: 20}} />
+                    <Text style={{flex: 1, fontSize: 18, color: 'black'}}>{rawData["Notes"] ? rawData["Notes"] : "No notes taken."}</Text>
+                </View>
+            </View>
+        );
         return activityInfo;
     }
 
