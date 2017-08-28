@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/style.js';
-import {Table, Rows} from 'react-native-table-component';
 import {
     AsyncStorage,
     Text,
@@ -132,9 +132,52 @@ var plantInfoView = class PlantInfoView extends Component{
     processPlantInfo(){
         var rawData = this.state.plantInfo;
         var plantInfo = [];
-        Object.keys(rawData).map(function(i){
-            plantInfo.push([i, rawData[i]]);
-        });
+        var today = new Date();
+        var weekday = new Array(7);
+        weekday[0] = "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+        var current = new Date(rawData["Date Planted"]);
+        if(today.getDate() == current.getDate() && today.getMonth() == current.getMonth() && today.getFullYear() == current.getFullYear()){
+            date_string = "Today";
+        } else {
+            date_string = weekday[current.getDay()] + ", " + current.getDate() + "/" + (current.getMonth() + 1) + "/" + current.getFullYear();
+        }
+
+        plantInfo.push(
+            <View style={styles.margin}>
+                <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+                    <Icon name="qrcode" style={{fontSize: 25, color: '#fe4a49', marginRight: 20}} />
+                    <Text style={{flex: 1, fontSize: 18, color: 'black'}}>{rawData["Plant ID"]}</Text>
+                </View>
+                <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+                    <Icon name="leaf" style={{fontSize: 25, color: '#fe4a49', marginRight: 20}} />
+                    <Text style={{flex: 1, fontSize: 18, color: 'black'}}>{rawData["Species"]} - {rawData["Variety"]}</Text>
+                </View>
+                <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+                    <Icon name="tag" style={{fontSize: 25, color: '#fe4a49', marginRight: 20}} />
+                    <Text style={{flex: 1, fontSize: 18, color: 'black'}}>{rawData["Visual Tag"] ? rawData["Visual Tag"] : "No visual tag recorded."}</Text>
+                </View>
+                <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+                    <Icon name="calendar-clock" style={{fontSize: 25, color: '#fe4a49', marginRight: 20}} />
+                    <View>
+                        <Text style={{fontSize: 18, color: 'black'}}>{date_string}</Text>
+                    </View>
+                </View>
+                <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+                    <Icon name="map-marker" style={{fontSize: 25, color: '#fe4a49', marginRight: 20}} />
+                    <Text style={{flex: 1, fontSize: 18, color: 'black'}}>{rawData["Latitude"]}, {rawData["Longitude"]}</Text>
+                </View>
+                <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+                    <Icon name="lead-pencil" style={{fontSize: 25, color: '#fe4a49', marginRight: 20}} />
+                    <Text style={{flex: 1, fontSize: 18, color: 'black'}}>{rawData["Notes"] ? rawData["Notes"] : "No notes taken."}</Text>
+                </View>
+            </View>
+        );
         return plantInfo;
     }
 
@@ -159,12 +202,7 @@ var plantInfoView = class PlantInfoView extends Component{
             return(
                 <View style={styles.pageContent}>
                     <ScrollView>
-                        <Table
-                            style={styles.table}
-                            borderStyle={{borderWidth: 1, borderColor: '#e7e4e4'}}
-                            >
-                            <Rows data={plantInfo} textStyle={styles.rowText} />
-                        </Table>
+                        {plantInfo}
                         <View style={styles.margin}>
                             <Text style={styles.heading}>Activity History</Text>
                         </View>
