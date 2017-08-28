@@ -59,7 +59,9 @@ const customDrawer = class CustomDrawer extends Component{
             <View style={{flex: 1}}>
                 <View>
                     <View style={styles.drawerBanner}>
-                        <Image style={styles.margin} source={require('../img/side_logo.jpg')} />
+                        <View style={{width: '100%', height: 100, alignItems: 'center', justifyContent: 'center'}}>
+                            <Image style={{width:'80%', height: '90%'}} source={require('../img/logo_v1_white.png')} />
+                        </View>
                         <View style={styles.margin}>
                             <Text style={styles.sideHeading}>You are logged in as {this.state.user}</Text>
                         </View>
